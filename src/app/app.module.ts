@@ -9,7 +9,9 @@ import {
   MdToolbarModule,
   MdInputModule,
   MdListModule,
-  MdCardModule
+  MdCardModule,
+  MdButtonModule,
+  MdChipsModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -33,6 +35,8 @@ import { IssueComponent } from './issue/issue.component';
     MdInputModule,
     MdListModule,
     MdCardModule,
+    MdButtonModule,
+    MdChipsModule,
     RouterModule.forRoot([
       {
         path: '',

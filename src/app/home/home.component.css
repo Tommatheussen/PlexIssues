@@ -1,0 +1,3 @@
+.issue-card:not(:last-child) {
+  margin-bottom: 25px;
+}

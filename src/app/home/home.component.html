@@ -1,11 +1,19 @@
 <h3>Newest issues</h3>
-<md-card *ngFor="let issue of issues">
-  <md-card-header>
-    <md-card-title>{{ issue.movie }}</md-card-title>
-    <md-card-subtitle>{{ issue.category }}</md-card-subtitle>
-  </md-card-header>
-  <md-card-content>
-    <p>{{ issue.description }}</p>
-    <p>Opened at {{ issue.date}}</p>
-  </md-card-content>
-</md-card>
+<div>
+  <md-card class="issue-card" *ngFor="let issue of issues">
+    <md-card-header>
+      <md-card-title>{{ issue.item }} - {{ issue.type }}</md-card-title>
+      <md-card-subtitle>Opened at {{ issue.date | date : 'dd-MM-yyyy HH:mm' }}</md-card-subtitle>
+    </md-card-header>
+    <md-card-content>
+      <md-chip-list>
+        <md-chip>{{ issue.type }}</md-chip>
+        <md-chip>{{ issue.movie }}</md-chip>
+      </md-chip-list>
+      <p>{{ issue.description }}</p>
+    </md-card-content>
+    <md-card-actions>
+      <button md-button>Resolve</button>
+    </md-card-actions>
+  </md-card>
+</div>
