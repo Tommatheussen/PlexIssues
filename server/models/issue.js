@@ -1,11 +1,40 @@
 const Sequelize = require('sequelize');
 const database = require('../database.js').database;
 
-let Issue = database.define('issue', {
-  type: Sequelize.STRING,
-  description: Sequelize.TEXT
+let schema = {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true
+  },
+  type: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  item: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  description: {
+    type: Sequelize.TEXT,
+    allowNull: false
+  },
+  status: {
+    type: Sequelize.ENUM,
+    values: ["new", "confirmed", "rejected", "pending", "done"],
+    allowNull: false
+  },
+  opendate: {
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+  }
+};
+
+let Issue = database.define('issue', schema, {
+  timestamps: false
 });
 
-module.exports = {
-  Issue: Issue
-}
+Issue.sync().then(res => {}, err => {
+  console.log("Failed to create table:", err);
+});
+
+module.exports = Issue

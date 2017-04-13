@@ -7,19 +7,14 @@ const api = require('./routes/api');
 
 const app = express();
 
-const db = require('sqlite');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-const Promise = require('bluebird');
+app.use('/api', api);
 
+const port = process.env.PORT || '3000';
+app.set('port', port);
 
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: false }));
+const server = http.createServer(app);
 
-    app.use('/api', api);
-
-    const port = process.env.PORT || '3000';
-    app.set('port', port);
-
-    const server = http.createServer(app);
-
-    server.listen(port, () => console.log(`API running on localhost: ${port}`));
+server.listen(port, () => console.log(`API running on localhost: ${port}`));

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const Issue = require('../models/issue').Issue
+const Issue = require('../models').Issue;
 
 const issues = require('./data/issues.js');
 
@@ -20,13 +20,18 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  Issue.sync().then(function () {
-    return Issue.create({
-      type: "Lang",
-      description: "Desc"
-    }).then(function (data) {
-      res.send(data);
-    });
+  let status = req.body.status;
+
+  return Issue.create({
+    type: "Lang",
+    description: "Desc",
+    item: "test",
+    status: status
+  }).then(function (data) {
+    res.send(data);
+  }, function (error) {
+    console.log("Failed:", error);
+    res.send();
   });
 
 
