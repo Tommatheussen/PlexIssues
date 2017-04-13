@@ -7,10 +7,12 @@ import { Issue } from './issue';
 
 @Injectable()
 export class IssueService {
+  private IssueUrl: string = "/api/issue";
+
 	constructor(private http: Http) { }
 
 	getIssues(): Promise<Issue[]> {
-		return this.http.get('api/issue')
+		return this.http.get(this.IssueUrl)
 			.toPromise()
 			.then(function(response) {
 				console.log(response.json());
@@ -25,14 +27,14 @@ export class IssueService {
 		params.set('sort', 'openDate');
 		params.set('status', 'new');
 
-		return this.http.get('api/issue', { search: params })
+		return this.http.get(this.IssueUrl, { search: params })
 			.toPromise()
 			.then(function(response) {
 				console.log(response.json());
 				return response.json() as Issue[]
 			})
 			.catch(this.handleError);
-	}
+  }
 
 	private handleError(error: any): Promise<any> {
 		console.error('An error occurred', error); // for demo purposes only

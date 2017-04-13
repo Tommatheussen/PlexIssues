@@ -4,7 +4,7 @@ const router = express.Router();
 const issues = require('./data/issues.js');
 
 /* GET api listing. */
-router.get('/issue', (req, res) => {
+router.get('/', (req, res) => {
 	let limit = req.query.limit || 10;
 	let sort = req.query.sort || "openDate";
 	let status = req.query.status || "new";
@@ -17,11 +17,11 @@ router.get('/issue', (req, res) => {
   	res.json(result);
 });
 
-router.post('issue', (req, res) => {
+router.post('/', (req, res) => {
 	res.ok();
 });
 
-router.put('issue', (req, res) => {
+router.put('/', (req, res) => {
 	res.ok();
 });
 
