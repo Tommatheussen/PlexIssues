@@ -3,6 +3,6 @@ export class Issue {
   type: string;
   item: string;
   description: string;
-  open: boolean = true;
-  date: Date = new Date();
+  status: string;
+  opendate: Date = new Date();
 }
