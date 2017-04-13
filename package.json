@@ -29,6 +29,8 @@
     "path": "^0.12.7",
     "plex-api": "^5.0.2",
     "rxjs": "^5.1.0",
+    "sequelize": "^3.30.4",
+    "sqlite3": "^3.1.8",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
