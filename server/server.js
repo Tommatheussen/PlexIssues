@@ -10,7 +10,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+var baseUrl = express.static(path.join(__dirname, '../dist'));
+app.use('/', baseUrl)
 app.use('/api', api);
+app.use('*', baseUrl);
 
 const port = process.env.PORT || '3000';
 app.set('port', port);

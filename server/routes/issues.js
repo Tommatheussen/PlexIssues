@@ -11,12 +11,9 @@ router.get('/', (req, res) => {
 	let sort = req.query.sort || "openDate";
 	let status = req.query.status || "new";
 
-	let result = issues.filter(issue => issue.status === status)
-		.sort((a, b) => {
-			return b["sort"] - a["sort"];
-		}).slice(0, limit);
-
-  	res.json(result);
+  Issue.findAll().then(function (issues) {
+    return res.json(issues);
+  });
 });
 
 router.post('/', (req, res) => {
@@ -25,8 +22,7 @@ router.post('/', (req, res) => {
   return Issue.create({
     type: "Lang",
     description: "Desc",
-    item: "test",
-    status: status
+    item: "test"
   }).then(function (data) {
     res.send(data);
   }, function (error) {

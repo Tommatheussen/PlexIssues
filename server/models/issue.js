@@ -21,6 +21,7 @@ let schema = {
   status: {
     type: Sequelize.ENUM,
     values: ["new", "confirmed", "rejected", "pending", "done"],
+    defaultValue: "new",
     allowNull: false
   },
   opendate: {
