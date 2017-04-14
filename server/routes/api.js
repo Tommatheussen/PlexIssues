@@ -6,7 +6,7 @@ router.get('/', (req, res) => {
   res.send('api works');
 });
 
-router.use("/issue", require('./issues'));
-router.use("/plex", require('./plex'));
+router.use('/issue', require('./issues'));
+router.use('/plex', require('./plex'));
 
 module.exports = router;

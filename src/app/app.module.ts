@@ -17,14 +17,16 @@ import {
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { HomeComponent } from './home/home.component';
-import { IssueComponent } from './issue/issue.component';
+import { IssueListComponent } from './issue-list/issue-list.component';
+import { IssuesComponent } from './issues/issues.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
     HomeComponent,
-    IssueComponent
+    IssueListComponent,
+    IssuesComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +48,10 @@ import { IssueComponent } from './issue/issue.component';
       {
         path: 'home',
         component: HomeComponent
+      },
+      {
+        path: 'list',
+        component: IssueListComponent
       }
     ])
   ],

@@ -4,22 +4,22 @@ import { Issue } from './../issue';
 import { IssueService } from './../issue.service';
 
 @Component({
-  selector: 'plexissues-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  selector: 'plexissues-issue-list',
+  templateUrl: './issue-list.component.html',
+  styleUrls: ['./issue-list.component.css'],
   providers: [IssueService]
 })
-export class HomeComponent implements OnInit {
+export class IssueListComponent implements OnInit {
   issues: Issue[];
 
   constructor(private issueService: IssueService) { }
 
-  ngOnInit(): void {
-    this.getLatestIssues();
+  ngOnInit() {
+    this.getIssues();
   }
 
-  getLatestIssues(): void {
-    this.issueService.getLatestIssues()
+  getIssues(): void {
+    this.issueService.getIssues()
       .then(issues => this.issues = issues);
   }
 

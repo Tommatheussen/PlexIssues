@@ -9,13 +9,13 @@ const issues = require('./data/issues.js');
 router.get('/', (req, res) => {
 	let limit = req.query.limit || 10;
 	let sort = req.query.sort || 'openDate';
-  let status = req.query.status || 'new';
   let order = req.query.order || 'ASC';
 
+  let where = {}
+  req.query.status ? where.status = req.query.status : null;
+  
   Issue.findAll({
-    where: {
-      status: status
-    },
+    where: where,
     order: [
       [sort, order]
     ],
