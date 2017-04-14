@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
-
 import 'rxjs/add/operator/toPromise';
 
 import { Issue } from './issue';
 
 @Injectable()
 export class IssueService {
-  private IssueUrl: string = "/api/issue";
+  private IssueUrl: string = '/api/issue';
 
 	constructor(private http: Http) { }
 
@@ -23,14 +22,14 @@ export class IssueService {
 
 	getLatestIssues(): Promise<Issue[]> {
 		let params = new URLSearchParams();
-		params.set('limit', '5');
-		params.set('sort', 'openDate');
-		params.set('status', 'new');
+    params.append('limit', '5');
+    params.append('sort', 'openDate');
+    params.append('order', 'DESC');
+    params.append('status', 'new');
 
 		return this.http.get(this.IssueUrl, { search: params })
 			.toPromise()
 			.then(function(response) {
-				console.log(response.json());
 				return response.json() as Issue[]
 			})
 			.catch(this.handleError);
@@ -41,10 +40,7 @@ export class IssueService {
 		return Promise.reject(error.message || error);
 	}
 
-
-
   addIssue(issue: Issue): Promise<Issue> {
     return Promise.resolve(issue);
   }
-
 }

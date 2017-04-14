@@ -13,7 +13,7 @@ router.get('/search', (req, res) => {
   }, function (err) {
     console.log(`Error searching: ${err}`);
     res.send(err);
-    //throw new Error("Could not connect to server");
+    //throw new Error('Could not connect to server');
   });
 });
 

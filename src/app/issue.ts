@@ -4,5 +4,5 @@ export class Issue {
   item: string;
   description: string;
   status: string;
-  opendate: Date = new Date();
+  openDate: Date = new Date();
 }
