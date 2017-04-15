@@ -14,8 +14,11 @@ export class IssueService {
 
 	constructor(private http: Http) { }
 
-	getIssues(): Promise<Issue[]> {
-		return this.http.get(this.IssueUrl)
+  getIssues(sort): Promise<Issue[]> {
+    let params = new URLSearchParams();
+    params.append('sort', sort);
+
+    return this.http.get(this.IssueUrl, { search: params })
 			.toPromise()
 			.then(function(response) {
 				console.log(response.json());

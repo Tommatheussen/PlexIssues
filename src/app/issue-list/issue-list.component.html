@@ -1,2 +1,5 @@
 <h1>All issues</h1>
+<md-select placeholder="Sort" [(ngModel)]="sort" name="sort" (change)="getIssues()">
+    <md-option *ngFor="let option of sortOptions" [value]="option.value">{{ option.name }}</md-option>
+</md-select>
 <plexissues-issues [issues]="issues"></plexissues-issues>

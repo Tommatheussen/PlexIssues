@@ -12,6 +12,23 @@ import { IssueService } from './../issue.service';
 export class IssueListComponent implements OnInit {
   issues: Issue[];
 
+  sort: string = 'openDate';
+
+  sortOptions: { value: string, name: string }[] = [
+    {
+      value: 'status',
+      name: 'Issue Status'
+    },
+    {
+      value: 'openDate',
+      name: 'Open Date'
+    },
+    {
+      value: 'type',
+      name: 'Issue Type'
+    }
+  ]
+
   constructor(private issueService: IssueService) { }
 
   ngOnInit() {
@@ -19,7 +36,7 @@ export class IssueListComponent implements OnInit {
   }
 
   getIssues(): void {
-    this.issueService.getIssues()
+    this.issueService.getIssues(this.sort)
       .then(issues => this.issues = issues);
   }
 
