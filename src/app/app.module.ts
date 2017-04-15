@@ -12,7 +12,8 @@ import {
   MdCardModule,
   MdButtonModule,
   MdChipsModule,
-  MdSelectModule
+  MdSelectModule,
+  MdProgressSpinnerModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -43,6 +44,7 @@ import { IssueComponent } from './issue/issue.component';
     MdButtonModule,
     MdChipsModule,
     MdSelectModule,
+    MdProgressSpinnerModule,
     RouterModule.forRoot([
       {
         path: '',
