@@ -15,3 +15,7 @@ before_install:
 
 notifications:
   email: false
+
+branches:
+  only:
+    - /^(?i:greenkeeper)\/.*$/
