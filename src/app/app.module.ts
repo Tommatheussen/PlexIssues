@@ -5,16 +5,7 @@ import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
-import {
-  MdToolbarModule,
-  MdInputModule,
-  MdListModule,
-  MdCardModule,
-  MdButtonModule,
-  MdChipsModule,
-  MdSelectModule,
-  MdProgressSpinnerModule
-} from '@angular/material';
+import { MaterialModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -37,14 +28,7 @@ import { IssueComponent } from './issue/issue.component';
     FormsModule,
 	  HttpModule,
 	  BrowserAnimationsModule,
-	  MdToolbarModule,
-    MdInputModule,
-    MdListModule,
-    MdCardModule,
-    MdButtonModule,
-    MdChipsModule,
-    MdSelectModule,
-    MdProgressSpinnerModule,
+	  MaterialModule.forRoot(),
     RouterModule.forRoot([
       {
         path: '',

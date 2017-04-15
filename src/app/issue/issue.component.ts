@@ -7,22 +7,21 @@ import { IssueService } from '../issue.service';
   selector: 'plexissues-issue',
   templateUrl: './issue.component.html',
   styleUrls: ['./issue.component.css'],
-  providers: [IssueService],
+  providers: [IssueService]
 })
 export class IssueComponent {
   @Input() issue: Issue;
 
   constructor(private issueService: IssueService) { }
 
-  confirmIssue(): void {
+  updateIssue(status): void {
     const copy = { ...this.issue };
-    copy.status = 'confirmed';
+    copy.status = status;
     this.issueService.updateIssue(copy)
-      .subscribe(() => {
-        console.log(this.issue.status);
-        return this.issue = { ...copy };
-        //console.log(issue.status);
-      });
+      .subscribe(() => this.issue = { ...copy });
   }
 
+  removeIssue(): void {
+    this.issueService.removeIssue(this.issue)
+  }
 }

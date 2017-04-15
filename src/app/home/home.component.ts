@@ -22,5 +22,4 @@ export class HomeComponent implements OnInit {
     this.issueService.getLatestIssues()
       .then(issues => this.issues = issues);
   }
-
 }

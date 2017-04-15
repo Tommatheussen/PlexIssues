@@ -11,5 +11,16 @@
     <p>{{ issue.description }}</p>
   </md-card-content>
   <md-card-actions>
-    <button md-button (click)="confirmIssue(issue)">Confirm</button>
+    <button md-mini-fab (click)="updateIssue('confirmed')">
+      <md-icon>done</md-icon>
+    </button>
+    <button md-mini-fab (click)="updateIssue('done')">
+      <md-icon>done_all</md-icon>
+    </button>
+    <button md-mini-fab (click)="updateIssue('rejected')">
+      <md-icon>clear</md-icon>
+    </button>
+    <button md-mini-fab (click)="removeIssue()">
+      <md-icon>delete_forever</md-icon>
+    </button>
   </md-card-actions>
