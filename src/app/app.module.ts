@@ -19,6 +19,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { HomeComponent } from './home/home.component';
 import { IssueListComponent } from './issue-list/issue-list.component';
 import { IssuesComponent } from './issues/issues.component';
+import { IssueComponent } from './issue/issue.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { IssuesComponent } from './issues/issues.component';
     ToolbarComponent,
     HomeComponent,
     IssueListComponent,
-    IssuesComponent
+    IssuesComponent,
+    IssueComponent
   ],
   imports: [
     BrowserModule,

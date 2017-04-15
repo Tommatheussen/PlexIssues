@@ -38,23 +38,17 @@ router.post('/', (req, res) => {
     res.send(data);
   }, function (error) {
     console.log('Failed:', error);
-    res.send();
+    res.status(400).send(error);
   });
-
-
-  /*db.run('INSERT INTO Issue(type, item, description) VALUES($type, $item, $description)', {
-    $type: 'Language',
-    $item: 'Zambezia',
-    $description: 'This movie is in Russian?'
-  }).then(function (promise) {
-    console.log(promise);
-    return promise;
-  });*/
-	//res.send();
 });
 
-router.put('/', (req, res) => {
-	res.ok();
+router.put('/:id', (req, res) => {
+  Issue.update(req.body, { where: { id: req.params.id } }).then(function (result) {
+    res.status(204).send();
+  }, function (error) {
+    console.log('Failed to update:', error);
+    res.status(400).send(error);
+  });
 });
 
 module.exports = router;

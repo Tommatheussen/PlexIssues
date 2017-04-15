@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Http, URLSearchParams } from '@angular/http';
+import { Http, Response, URLSearchParams, Headers } from '@angular/http';
+
+import { Observable } from 'rxjs/Rx';
+
+import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
 import { Issue } from './issue';
@@ -18,7 +22,16 @@ export class IssueService {
 				return response.json() as Issue[]
 			})
 			.catch(this.handleError);
-	}
+  }
+  
+  updateIssue(issue: Issue): Observable<Issue[]> {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.put(`${this.IssueUrl}/${issue.id}`, JSON.stringify(issue), { headers: headers })
+      .map((res:Response) => res.json())
+     // .catch(this.handleError);
+  }
 
 	getLatestIssues(): Promise<Issue[]> {
 		let params = new URLSearchParams();

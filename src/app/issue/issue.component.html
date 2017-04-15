@@ -1,0 +1,15 @@
+<md-card-header>
+    <md-chip-list>
+      <md-chip>{{ issue.status }}</md-chip>
+    </md-chip-list>
+    <md-card-title>
+      {{ issue.item }} - {{ issue.type }} - {{ issue.id }}
+    </md-card-title>
+    <md-card-subtitle>Opened at {{ issue.openDate | date : 'dd-MM-yyyy HH:mm' }}</md-card-subtitle>
+  </md-card-header>
+  <md-card-content>
+    <p>{{ issue.description }}</p>
+  </md-card-content>
+  <md-card-actions>
+    <button md-button (click)="confirmIssue(issue)">Confirm</button>
+  </md-card-actions>
