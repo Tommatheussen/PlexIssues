@@ -2,4 +2,8 @@
 <md-select placeholder="Sort" [(ngModel)]="sort" name="sort" (change)="getIssues()">
     <md-option *ngFor="let option of sortOptions" [value]="option.value">{{ option.name }}</md-option>
 </md-select>
+
+<md-select placeholder="Status" [(ngModel)]="status" name="status" (change)="getIssues()">
+    <md-option *ngFor="let option of statusFilterOptions" [value]="option.value">{{ option.name }}</md-option>
+</md-select>
 <plexissues-issues [issues]="issues"></plexissues-issues>

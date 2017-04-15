@@ -14,9 +14,10 @@ export class IssueService {
 
 	constructor(private http: Http) { }
 
-  getIssues(sort): Promise<Issue[]> {
+  getIssues(sort: string, status: string): Promise<Issue[]> {
     let params = new URLSearchParams();
     params.append('sort', sort);
+    params.append('status', status);
 
     return this.http.get(this.IssueUrl, { search: params })
 			.toPromise()

@@ -13,6 +13,7 @@ export class IssueListComponent implements OnInit {
   issues: Issue[];
 
   sort: string = 'openDate';
+  status: string = undefined;
 
   sortOptions: { value: string, name: string }[] = [
     {
@@ -29,6 +30,29 @@ export class IssueListComponent implements OnInit {
     }
   ]
 
+  statusFilterOptions: { value: string, name: string }[] = [
+    {
+      value: undefined,
+      name: 'All'
+    },
+    {
+      value: 'new',
+      name: 'New'
+    },
+    {
+      value: 'done',
+      name: 'Done'
+    },
+    {
+      value: 'rejected',
+      name: 'Rejected'
+    },
+    {
+      value: 'confirmed',
+      name: 'Confirmed'
+    }
+  ]
+
   constructor(private issueService: IssueService) { }
 
   ngOnInit() {
@@ -36,7 +60,7 @@ export class IssueListComponent implements OnInit {
   }
 
   getIssues(): void {
-    this.issueService.getIssues(this.sort)
+    this.issueService.getIssues(this.sort, this.status)
       .then(issues => this.issues = issues);
   }
 
