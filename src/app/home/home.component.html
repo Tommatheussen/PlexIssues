@@ -1,2 +1,3 @@
 <h1>Newest issues</h1>
-<plexissues-issues [issues]="issues"></plexissues-issues>
+<md-spinner *ngIf="!issues"></md-spinner>
+<plexissues-issues *ngIf="issues" [issues]="issues"></plexissues-issues>
