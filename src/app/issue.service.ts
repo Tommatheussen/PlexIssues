@@ -45,6 +45,14 @@ export class IssueService {
       .map((res: Response) => res.json())
   }
 
+  searchPlex(search: string): Observable<any> {
+    let params = new URLSearchParams();
+    params.append('search', search);
+
+    return this.http.get('/api/plex/', { search: params })
+      .map((res: Response) => res.json());
+  }
+
 	getLatestIssues(): Promise<Issue[]> {
 		let params = new URLSearchParams();
     params.append('limit', '5');

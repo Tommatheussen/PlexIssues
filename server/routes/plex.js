@@ -5,10 +5,9 @@ const plexAPI = require('plex-api');
 
 var plexClient = new plexAPI(require('./../config'));
 
-router.get('/search', (req, res) => {
-  let query = req.query.search;
-  plexClient.query(`/search?query=${query}`).then(function (response) {
-    console.log(response.MediaContainer.Metadata);
+router.get('/', (req, res) => {
+  let search = req.query.search;
+  plexClient.query(`/search?query=${search}`).then(function (response) {
     res.json(response.MediaContainer.Metadata);
   }, function (err) {
     console.log(`Error searching: ${err}`);
