@@ -37,6 +37,14 @@ export class IssueService {
      // .catch(this.handleError);
   }
 
+  addIssue(issue: Issue): Observable<Issue> {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post(this.IssueUrl, JSON.stringify(issue), { headers: headers })
+      .map((res: Response) => res.json())
+  }
+
 	getLatestIssues(): Promise<Issue[]> {
 		let params = new URLSearchParams();
     params.append('limit', '5');
@@ -61,7 +69,4 @@ export class IssueService {
 		return Promise.reject(error.message || error);
 	}
 
-  addIssue(issue: Issue): Promise<Issue> {
-    return Promise.resolve(issue);
-  }
 }

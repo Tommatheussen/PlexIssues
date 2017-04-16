@@ -1,0 +1,18 @@
+<h1>New issue</h1>
+<form #newIssueForm="ngForm" (ngSubmit)="createIssue(); newIssueForm.form.reset()">
+  <md-input-container>
+    <input mdInput type="text" placeholder="Plex item" 
+     [(ngModel)]="issue.item" name="description" required>
+  </md-input-container>
+
+  <md-select placeholder="Type" [(ngModel)]="issue.type" name="type" required>
+    <md-option [value]="'language'">Language</md-option>
+  </md-select>
+
+  <md-input-container>
+    <textarea mdInput type="text" placeholder="Description" 
+     [(ngModel)]="issue.description" name="description" mdTextereaAutosize></textarea>
+  </md-input-container>
+
+  <button md-raised-button type="submit" [disabled]="!newIssueForm.form.valid">Submit</button>
+</form>

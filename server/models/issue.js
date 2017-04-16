@@ -15,8 +15,7 @@ let schema = {
     allowNull: false
   },
   description: {
-    type: Sequelize.TEXT,
-    allowNull: false
+    type: Sequelize.TEXT
   },
   status: {
     type: Sequelize.ENUM,
