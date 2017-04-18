@@ -1,6 +1,7 @@
 # PlexIssues
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/Tommatheussen/PlexIssues.svg)](https://greenkeeper.io/)
+[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/PlexIssues/Lobby)
 
 This project is created to allow users of Plex to centralize all their issues with content in 1 place.
 Allows easy creation of new issues and resolving/rejecting issues.
