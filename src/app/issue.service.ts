@@ -4,7 +4,6 @@ import { Http, Response, URLSearchParams, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
 
 import { Issue } from './issue';
 
@@ -14,18 +13,14 @@ export class IssueService {
 
 	constructor(private http: Http) { }
 
-  getIssues(sort: string, status: string): Promise<Issue[]> {
+  getIssues(sort: string, status: string): Observable<Issue[]> {
     let params = new URLSearchParams();
     params.append('sort', sort);
     params.append('status', status);
 
     return this.http.get(this.IssueUrl, { search: params })
-			.toPromise()
-			.then(function(response) {
-				console.log(response.json());
-				return response.json() as Issue[]
-			})
-			.catch(this.handleError);
+			.map((res:Response) => res.json() as Issue[])
+		//	.catch(this.handleError);
   }
   
   updateIssue(issue: Issue): Observable<Issue[]> {
@@ -45,15 +40,7 @@ export class IssueService {
       .map((res: Response) => res.json())
   }
 
-  searchPlex(search: string): Observable<any> {
-    let params = new URLSearchParams();
-    params.append('search', search);
-
-    return this.http.get('/api/plex/', { search: params })
-      .map((res: Response) => res.json());
-  }
-
-	getLatestIssues(): Promise<Issue[]> {
+	getLatestIssues(): Observable<Issue[]> {
 		let params = new URLSearchParams();
     params.append('limit', '5');
     params.append('sort', 'openDate');
@@ -61,11 +48,7 @@ export class IssueService {
     params.append('status', 'new');
 
 		return this.http.get(this.IssueUrl, { search: params })
-			.toPromise()
-			.then(function(response) {
-				return response.json() as Issue[]
-			})
-			.catch(this.handleError);
+			.map((res:Response) => res.json() as Issue[])
   }
 
   removeIssue(issue): void {

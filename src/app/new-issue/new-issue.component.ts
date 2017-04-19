@@ -1,8 +1,13 @@
-import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { Issue } from './../issue';
-import { IssueService } from './../issue.service';
+import { Issue } from '../issue';
+import { PlexItem } from '../plex-item';
+
+import { IssueService } from '../issue.service';
+import { PlexService } from '../plex.service';
+
+import { NewIssue } from './new-issue.interface';
 
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/observable/from';
@@ -11,29 +16,64 @@ import 'rxjs/add/observable/from';
   selector: 'plexissues-new-issue',
   templateUrl: './new-issue.component.html',
   styleUrls: ['./new-issue.component.css'],
-  providers: [IssueService]
+  providers: [
+    IssueService,
+    PlexService
+  ]
 })
-export class NewIssueComponent {
-  issue: Issue = new Issue;
-  plexItemsCtrl: FormControl;
-  plexItems: any;
+export class NewIssueComponent implements OnInit {
+  public issueForm: FormGroup;
+  public submitted: boolean;
 
-  constructor(private issueService: IssueService) {
-    this.plexItemsCtrl = new FormControl();
-    this.plexItems = this.plexItemsCtrl.valueChanges
-      .debounceTime(1000)  
+  plexItems: Observable<PlexItem[]>;
+
+  dict: { [index: string]: string; } = {
+    movie: 'local_movies',
+    show: 'tv',
+    episode: 'tv',
+    artist: 'person',
+    album: 'album',
+    track: 'music_note'
+  }
+
+  constructor(
+    private issueService: IssueService,
+    private plexService: PlexService,
+    private _fb: FormBuilder
+  ) { } 
+  
+  ngOnInit() {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.issueForm = this._fb.group({
+      plexitem: ['', <any>Validators.required],
+      type: ['', <any>Validators.required],
+      description: ['']
+    });
+
+    this.plexItems = this.issueForm.controls['plexitem'].valueChanges
+      .debounceTime(500)
       .startWith(null)
       .switchMap(name => this.getPlexItems(name));
   }
   
-  getPlexItems(val: string) {
-    return val ? this.issueService.searchPlex(val) : Observable.from([]);
+  getPlexItems(val: string):Observable<PlexItem[]> {
+    return val ? this.plexService.searchPlex(val) : Observable.from([]);
   }
 
-  createIssue(): void {
-    this.issueService.addIssue(this.issue)
-      .subscribe(() => {
-        this.issue = new Issue;
+  createIssue(model: NewIssue, isValid: boolean): void {
+    let newIssue = new Issue();
+    newIssue.type = model.type;
+    newIssue.description = model.description;
+    newIssue.item = model.plexitem.key;
+
+    this.issueService.addIssue(newIssue)
+      .subscribe(() => { 
+        this.issueForm.reset();
       });
+  }
+
+  displayFn(item: PlexItem) {
+    return item ? item.title : item;
   }
 }

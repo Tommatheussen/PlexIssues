@@ -61,7 +61,7 @@ export class IssueListComponent implements OnInit {
 
   getIssues(): void {
     this.issueService.getIssues(this.sort, this.status)
-      .then(issues => this.issues = issues);
+      .subscribe(issues => this.issues = issues);
   }
 
 }

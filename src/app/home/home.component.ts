@@ -20,6 +20,6 @@ export class HomeComponent implements OnInit {
 
   getLatestIssues(): void {
     this.issueService.getLatestIssues()
-      .then(issues => this.issues = issues);
-  }
+      .subscribe(issues => this.issues = issues);
+  }  
 }

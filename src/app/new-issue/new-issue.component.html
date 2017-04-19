@@ -1,23 +1,27 @@
 <h1>New issue</h1>
-<form #newIssueForm="ngForm" (ngSubmit)="createIssue(); newIssueForm.form.reset()">
-  <md-input-container>
-    <input mdInput type="text" placeholder="Plex item" 
-     name="description" required
-     [mdAutocomplete]="auto" [formControl]="plexItemsCtrl">
+
+<form [formGroup]="issueForm" novalidate (ngSubmit)="createIssue(issueForm.value, issueForm.valid)">
+  <md-input-container class="issueform-control">
+    <input mdInput type="text" placeholder="Plex Item" formControlName="plexitem" [mdAutocomplete]="auto">
   </md-input-container>
 
-  <md-select placeholder="Type" [(ngModel)]="issue.type" name="type" required>
+  <md-select placeholder="Type" formControlName="type" class="issueform-control">
     <md-option [value]="'language'">Language</md-option>
+    <md-option [value]="'quality'">Quality</md-option>
+    <md-option [value]="'subtitle'">Subtitles</md-option>
   </md-select>
 
-  <md-input-container>
+  <md-input-container class="issueform-control">
     <textarea mdInput type="text" placeholder="Description" 
-     [(ngModel)]="issue.description" name="description" mdTextereaAutosize></textarea>
+      formControlName="description" mdTextereaAutosize></textarea>
   </md-input-container>
 
-  <button md-raised-button type="submit" [disabled]="!newIssueForm.form.valid">Submit</button>
+  <button md-raised-button type="submit" [disabled]="!issueForm.valid">Submit</button>
 </form>
 
-<md-autocomplete #auto="mdAutocomplete">
-  <md-option *ngFor="let state of (plexItems | async)" [value]="item">{{ item }}</md-option>
+<md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
+  <md-option *ngFor="let item of (plexItems | async)" [value]="item">
+    <md-icon>{{ dict[item.type] }}</md-icon>
+    <span>{{ item.title }}</span>
+  </md-option>
 </md-autocomplete>

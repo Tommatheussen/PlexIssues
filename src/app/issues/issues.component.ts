@@ -13,17 +13,5 @@ import { IssueService } from '../issue.service';
 export class IssuesComponent {
   @Input() issues: Issue[];
 
-  constructor(private issueService: IssueService) { }
-
-  confirmIssue(issue: Issue): void {
-    const copy = { ...issue };
-    copy.status = 'confirmed';
-    this.issueService.updateIssue(copy)
-      .subscribe(() => {
-        console.log(issue.status);
-        return issue = { ...copy };
-        //console.log(issue.status);
-      });
-  }
-
+  constructor() { }
 }

@@ -5,7 +5,7 @@ const plexAPI = require('plex-api');
 
 var plexClient = new plexAPI(require('./../config'));
 
-router.get('/', (req, res) => {
+router.get('/search', (req, res) => {
   let search = req.query.search;
   plexClient.query(`/search?query=${search}`).then(function (response) {
     res.json(response.MediaContainer.Metadata || []);
@@ -15,5 +15,16 @@ router.get('/', (req, res) => {
     //throw new Error('Could not connect to server');
   });
 });
+
+router.get('/', (req, res) => {
+  let key = req.query.key;
+
+  plexClient.query(key).then(function (response) {
+    res.json(response.MediaContainer.Metadata)
+  }, function (error) {
+    console.log(error);
+    res.send(error);
+  });
+})
 
 module.exports = router;
