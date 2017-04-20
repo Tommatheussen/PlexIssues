@@ -1,14 +1,19 @@
-<md-card-header>
+<div *ngIf="metadata">
+  <md-card-header>
+    <div md-card-avatar>
+      <md-icon>{{ dict[metadata.type] }}</md-icon>
+    </div>
     <md-chip-list>
       <md-chip>{{ issue.status }}</md-chip>
     </md-chip-list>
     <md-card-title>
-      {{ issue.item }} - {{ issue.type }}
+      {{ metadata.title }} - {{ issue.type }}
     </md-card-title>
     <md-card-subtitle>Opened at {{ issue.openDate | date : 'dd-MM-yyyy HH:mm' }}</md-card-subtitle>
   </md-card-header>
   <md-card-content>
     <p>{{ issue.description }}</p>
+    {{ metadata | json }}
   </md-card-content>
   <md-card-actions>
     <button md-mini-fab (click)="updateIssue('confirmed')" mdTooltip="Confirm">
@@ -24,3 +29,4 @@
       <md-icon>delete_forever</md-icon>
     </button>
   </md-card-actions>
+</div>
