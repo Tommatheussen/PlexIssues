@@ -19,8 +19,8 @@ router.get('/search', (req, res) => {
 router.get('/', (req, res) => {
   let key = req.query.key;
 
-  plexClient.query(key).then(function (response) {
-    res.json(response.MediaContainer.Metadata)
+  plexClient.query(`/library/metadata/${key}`).then(function (response) {
+    res.json(response.MediaContainer.Metadata[0] || [])
   }, function (error) {
     console.log(error);
     res.send(error);

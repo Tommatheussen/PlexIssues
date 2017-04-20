@@ -65,7 +65,7 @@ export class NewIssueComponent implements OnInit {
     let newIssue = new Issue();
     newIssue.type = model.type;
     newIssue.description = model.description;
-    newIssue.item = model.plexitem.key;
+    newIssue.item = model.plexitem.ratingKey;
 
     this.issueService.addIssue(newIssue)
       .subscribe(() => { 
