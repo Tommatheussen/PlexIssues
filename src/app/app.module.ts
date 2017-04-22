@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MaterialModule } from '@angular/material';
 
@@ -31,7 +32,8 @@ import { NewIssueComponent } from './new-issue/new-issue.component';
 	  HttpModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-	  MaterialModule.forRoot(),
+    FlexLayoutModule,
+    MaterialModule.forRoot(),
     RouterModule.forRoot([
       {
         path: '',

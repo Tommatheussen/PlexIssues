@@ -1,35 +1,39 @@
-<div *ngIf="!loading">
-  <md-card-header *ngIf="!metadata">
-    No metainfo found
-  </md-card-header>
-  <md-card-header *ngIf="metadata">
-    <div md-card-avatar>
-      <md-icon>{{ dict[metadata.type] }}</md-icon>
-    </div>
-    <md-chip-list>
-      <md-chip>{{ issue.status }}</md-chip>
-    </md-chip-list>
-    <md-card-title>
-      {{ metadata.title }} - {{ issue.type }}
-    </md-card-title>
-    <md-card-subtitle>Opened at {{ issue.openDate | date : 'dd-MM-yyyy HH:mm' }}</md-card-subtitle>
-  </md-card-header>
-  <md-card-content>
-    <p>{{ issue.description }}</p>
+<md-card class="issue-card">
+  <div *ngIf="!loading">
+    <md-card-content *ngIf="!metadata">
+      No metainfo found
+    </md-card-content>
+    <md-card-header *ngIf="metadata">
+      <div md-card-avatar>
+        <md-icon>{{ dict[metadata.type] }}</md-icon>
+      </div>
+      <md-chip-list>
+        <md-chip>{{ issue.status }}</md-chip>
+      </md-chip-list>
+      <md-card-title>
+        {{ metadata.title }} - {{ issue.type }}
+      </md-card-title>
+      <md-card-subtitle>Opened at {{ issue.openDate | date : 'dd-MM-yyyy HH:mm' }}</md-card-subtitle>
+    </md-card-header>
+    <md-card-content>
+      <p>{{ issue.description }}</p>
+    </md-card-content>
+    <md-card-actions>
+      <button md-mini-fab (click)="updateIssue('confirmed')" mdTooltip="Confirm">
+        <md-icon>done</md-icon>
+      </button>
+      <button md-mini-fab (click)="updateIssue('done')" mdTooltip="Done">
+        <md-icon>done_all</md-icon>
+      </button>
+      <button md-mini-fab (click)="updateIssue('rejected')" mdTooltip="Reject">
+        <md-icon>clear</md-icon>
+      </button>
+      <button md-mini-fab (click)="removeIssue()" mdTooltip="Remove">
+        <md-icon>delete_forever</md-icon>
+      </button>
+    </md-card-actions>
+  </div>
+  <md-card-content *ngIf="loading">
+    <md-spinner></md-spinner>
   </md-card-content>
-  <md-card-actions>
-    <button md-mini-fab (click)="updateIssue('confirmed')" mdTooltip="Confirm">
-      <md-icon>done</md-icon>
-    </button>
-    <button md-mini-fab (click)="updateIssue('done')" mdTooltip="Done">
-      <md-icon>done_all</md-icon>
-    </button>
-    <button md-mini-fab (click)="updateIssue('rejected')" mdTooltip="Reject">
-      <md-icon>clear</md-icon>
-    </button>
-    <button md-mini-fab (click)="removeIssue()" mdTooltip="Remove">
-      <md-icon>delete_forever</md-icon>
-    </button>
-  </md-card-actions>
-</div>
-<md-spinner *ngIf="loading"></md-spinner>
+</md-card>
