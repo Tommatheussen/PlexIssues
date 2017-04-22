@@ -1,5 +1,8 @@
-<div *ngIf="metadata">
-  <md-card-header>
+<div *ngIf="!loading">
+  <md-card-header *ngIf="!metadata">
+    No metainfo found
+  </md-card-header>
+  <md-card-header *ngIf="metadata">
     <div md-card-avatar>
       <md-icon>{{ dict[metadata.type] }}</md-icon>
     </div>
@@ -13,7 +16,6 @@
   </md-card-header>
   <md-card-content>
     <p>{{ issue.description }}</p>
-    {{ metadata | json }}
   </md-card-content>
   <md-card-actions>
     <button md-mini-fab (click)="updateIssue('confirmed')" mdTooltip="Confirm">
@@ -30,3 +32,4 @@
     </button>
   </md-card-actions>
 </div>
+<md-spinner *ngIf="loading"></md-spinner>

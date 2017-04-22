@@ -18,6 +18,7 @@ import { PlexService } from '../plex.service';
 export class IssueComponent implements OnInit{
   @Input() issue: Issue;
 
+  public loading: boolean = true;  
   public metadata: PlexItem;
 
   dict: { [index: string]: string; } = {
@@ -37,6 +38,7 @@ export class IssueComponent implements OnInit{
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.plexService.getPlexItem(this.issue.item)
+      .finally(() => this.loading = false)
       .subscribe((item) => {
         console.log(item);
         this.metadata = item;
