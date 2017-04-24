@@ -3,7 +3,7 @@
 var fs = require('fs');
 var path = require('path');
 var Sequelize = require('sequelize');
-var env = process.env.NODE_EV || 'development';
+var env = process.env.NODE_ENV || 'development';
 var config = require(path.join(__dirname, '..', 'config', 'database.json'))[env];
 config.typeValidation = true;
 var sequelize = new Sequelize(config.database, null, null, config);
