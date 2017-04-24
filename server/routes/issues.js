@@ -3,8 +3,6 @@ const router = express.Router();
 
 const Issue = require('../models').Issue;
 
-const issues = require('./data/issues.js');
-
 /* GET api listing. */
 router.get('/', (req, res) => {
 	let limit = req.query.limit || 10;
@@ -13,7 +11,7 @@ router.get('/', (req, res) => {
 
   let where = {}
   req.query.status ? where.status = req.query.status : null;
-  
+
   Issue.findAll({
     where: where,
     order: [
@@ -29,7 +27,7 @@ router.post('/', (req, res) => {
   let type = req.body.type;
   let description = req.body.description;
   let item = req.body.item;
-  
+
   return Issue.create({
     type: type,
     description: description,
