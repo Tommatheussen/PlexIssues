@@ -7,7 +7,8 @@
     "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "test": "ng test --watch false",
-    "api-test": "node_modules/.bin/cross-env NODE_ENV=test ./node_modules/.bin/mocha server/tests/unit/*.test.js"
+    "api-test": "node_modules/.bin/cross-env NODE_ENV=test ./node_modules/.bin/mocha server/tests/unit/*.test.js",
+    "int-test": "node_modules/.bin/cross-env NODE_ENV=test ./node_modules/.bin/mocha server/tests/integration/*.test.js"
   },
   "private": true,
   "dependencies": {
@@ -32,6 +33,7 @@
     "rxjs": "^5.1.0",
     "sequelize": "^3.30.4",
     "sqlite3": "^3.1.8",
+    "supertest": "^3.0.0",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
