@@ -3,30 +3,30 @@
 module.exports = function (sequelize, DataTypes) {
   var Issue = sequelize.define("Issue", {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true
     },
     type: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     item: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     description: {
-      type: Sequelize.TEXT
+      type: DataTypes.TEXT
     },
     status: {
-      type: Sequelize.ENUM,
+      type: DataTypes.ENUM,
       values: ['new', 'confirmed', 'rejected', 'pending', 'done'],
       defaultValue: 'new',
       allowNull: false
     },
     openDate: {
       field: 'open_date',
-      type: Sequelize.DATE,
-      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      type: DataTypes.DATE,
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, { timestamps: false });
 

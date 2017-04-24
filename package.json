@@ -6,7 +6,8 @@
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
-    "test": "ng test --watch false"
+    "test": "ng test --watch false",
+    "api-test": "node_modules/.bin/cross-env NODE_ENV=test ./node_modules/.bin/mocha server/tests/unit/*.test.js"
   },
   "private": true,
   "dependencies": {
@@ -39,6 +40,8 @@
     "@types/jasmine": "2.5.47",
     "@types/node": "~7.0.12",
     "codelyzer": "~2.1.1",
+    "cross-env": "^4.0.0",
+    "expect.js": "^0.3.1",
     "jasmine": "^2.5.3",
     "jasmine-core": "^2.5.2",
     "jasmine-spec-reporter": "^4.0.0",
@@ -47,6 +50,7 @@
     "karma-cli": "^1.0.1",
     "karma-coverage-istanbul-reporter": "^1.2.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "mocha": "^3.3.0",
     "protractor": "^5.1.1",
     "ts-node": "~3.0.2",
     "tslint": "~5.1.0",
