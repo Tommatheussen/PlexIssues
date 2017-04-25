@@ -8,16 +8,35 @@ router.get('/', (req, res) => {
 	let limit = req.query.limit || 10;
 	let sort = req.query.sort || 'openDate';
   let order = req.query.order || 'ASC';
+  let page = req.query.page || 1;
 
   let where = {}
   req.query.status ? where.status = req.query.status : null;
 
-  Issue.findAll({
+  Issue.findAndCount({
     where: where,
     order: [
       [sort, order]
     ],
-    limit: limit
+    limit: limit,
+    offset: limit * (page - 1)
+  }).then(function (issues) {
+    return res.json({
+      count: issues.count,
+      issues: issues.rows
+    });
+  });
+});
+
+router.get('/latest', (req, res) => {
+  Issue.findAll({
+    where: {
+      status: 'new'
+    },
+    order: [
+      ['openDate', 'DESC']
+    ],
+    limit: 5
   }).then(function (issues) {
     return res.json(issues);
   });

@@ -8,4 +8,9 @@
 </md-select>
 
 <md-spinner *ngIf="!issues"></md-spinner>
-<plexissues-issues [issues]="issues"></plexissues-issues>
+<plexissues-issues [issues]="issues | async | paginate: { id: 'server', itemsPerPage: 10, currentPage: p, totalItems: total }"></plexissues-issues>
+
+<div class="has-text-centered">
+    <div class="spinner" [ngClass]="{ 'hidden': !loading }">Spin</div>
+    <pagination-controls (pageChange)="getIssues($event)" id="server"></pagination-controls>
+</div>

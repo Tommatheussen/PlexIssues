@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Observable } from 'rxjs';
+
 import { Issue } from './../issue';
 import { IssueService } from './../issue.service';
 
@@ -10,7 +12,11 @@ import { IssueService } from './../issue.service';
   providers: [IssueService]
 })
 export class IssueListComponent implements OnInit {
-  issues: Issue[];
+  issues: Observable<Issue[]>;
+
+
+  p: number = 1;
+  total: number;
 
   sort: string = 'openDate';
   status: string = undefined;
@@ -56,12 +62,16 @@ export class IssueListComponent implements OnInit {
   constructor(private issueService: IssueService) { }
 
   ngOnInit() {
-    this.getIssues();
+    this.getIssues(this.p);
   }
 
-  getIssues(): void {
-    this.issueService.getIssues(this.sort, this.status)
-      .subscribe(issues => this.issues = issues);
+  getIssues(page: number): void {
+    this.issues = this.issueService.getIssues(this.sort, this.status, page)
+      .do(res => {
+        this.total = res.count;
+        this.p = page;
+      }).map(res => res.issues);
+      //.subscribe(issues => this.issues = issues);
   }
 
 }
