@@ -1,0 +1,11 @@
+<h1>Newest issues</h1>
+<md-spinner *ngIf="!settings"></md-spinner>
+<div *ngIf="settings">
+  {{ settings | json }}
+
+  {{ settings.plexhost }}
+  {{ settings.plexport }}
+  {{ settings.username }}
+  {{ settings.password }}
+  {{ settings.home }}
+</div>

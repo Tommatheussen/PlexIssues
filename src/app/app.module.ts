@@ -16,6 +16,7 @@ import { IssueListComponent } from './issue-list/issue-list.component';
 import { IssuesComponent } from './issues/issues.component';
 import { IssueComponent } from './issue/issue.component';
 import { NewIssueComponent } from './new-issue/new-issue.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { NewIssueComponent } from './new-issue/new-issue.component';
     IssueListComponent,
     IssuesComponent,
     IssueComponent,
-    NewIssueComponent
+    NewIssueComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +55,10 @@ import { NewIssueComponent } from './new-issue/new-issue.component';
       {
         path: 'new',
         component: NewIssueComponent
+      },
+      {
+        path: 'settings',
+        component: SettingsComponent
       }
     ])
   ],
