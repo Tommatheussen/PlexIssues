@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 import { Issue } from './../issue';
 import { SettingsService } from './../settings.service';
@@ -11,15 +12,25 @@ import { SettingsService } from './../settings.service';
 })
 export class SettingsComponent implements OnInit {
   settings: {};
+  public settingsForm: FormGroup;
 
-  constructor(private settingsService: SettingsService) { }
+  constructor(
+    private settingsService: SettingsService,
+    private _fb: FormBuilder
+  ) { }
 
   ngOnInit(): void {
+    this.settingsForm = this._fb.group({
+      plexhost: [''],
+      plexport: ['']
+    });
+
     this.getSettings();
   }
 
   getSettings(): void {
+    console.log(this.settingsForm);
     this.settingsService.getSettings()
-      .subscribe(settings => this.settings = settings);
+      .subscribe(settings => this.settingsForm.setValue(settings));
   }
 }

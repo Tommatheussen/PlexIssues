@@ -6,7 +6,12 @@ const Settings = require('../models').Settings;
 /* GET api listing. */
 router.get('/', (req, res) => {
   Settings.findAll().then(function (settings) {
-    return res.json(settings);
+    var result = {};
+    settings.map(function (setting) {
+      console.log(setting);
+      result[setting.name] = setting.value;
+    });
+    return res.json(result);
   });
 });
 
