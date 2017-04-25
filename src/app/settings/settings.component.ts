@@ -22,7 +22,9 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
     this.settingsForm = this._fb.group({
       plexhost: [''],
-      plexport: ['']
+      plexport: [''],
+      username: [''],
+      password: ['']
     });
 
     this.getSettings();
