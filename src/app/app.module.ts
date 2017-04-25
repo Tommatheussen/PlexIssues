@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { MaterialModule } from '@angular/material';
 
@@ -33,6 +34,7 @@ import { NewIssueComponent } from './new-issue/new-issue.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    NgxPaginationModule,
     MaterialModule.forRoot(),
     RouterModule.forRoot([
       {
