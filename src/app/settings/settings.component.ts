@@ -31,6 +31,6 @@ export class SettingsComponent implements OnInit {
   getSettings(): void {
     console.log(this.settingsForm);
     this.settingsService.getSettings()
-      .subscribe(settings => this.settingsForm.setValue(settings));
+      .subscribe(settings => this.settingsForm.patchValue(settings));
   }
 }
