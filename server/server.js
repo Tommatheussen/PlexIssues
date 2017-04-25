@@ -26,6 +26,7 @@ app.set('port', port);
 const server = http.createServer(app);
 
 models.sequelize.sync().then(function () {
-
   server.listen(port, () => console.log(`API running on localhost: ${port}`));
 });
+
+module.exports = app;

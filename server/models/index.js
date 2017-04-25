@@ -4,8 +4,10 @@ var fs = require('fs');
 var path = require('path');
 var Sequelize = require('sequelize');
 var env = process.env.NODE_ENV || 'development';
-var config = require(path.join(__dirname, '..', 'config', 'database.json'))[env];
+var config = require('../config/database.json')[env];
 config.typeValidation = true;
+config.logging = (env == 'development' ? function (string, val) { console.log(string); } : false);
+
 var sequelize = new Sequelize(config.database, null, null, config);
 
 var db = {};
