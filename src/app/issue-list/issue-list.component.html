@@ -1,9 +1,9 @@
 <h1 fxLayout="row" fxLayoutAlign="center center">All issues</h1>
-<md-select placeholder="Sort" [(ngModel)]="sort" name="sort" (change)="getIssues()">
+<md-select placeholder="Sort" [(ngModel)]="sort" name="sort" (change)="getIssues(1)">
     <md-option *ngFor="let option of sortOptions" [value]="option.value">{{ option.name }}</md-option>
 </md-select>
 
-<md-select placeholder="Status" [(ngModel)]="status" name="status" (change)="getIssues()">
+<md-select placeholder="Status" [(ngModel)]="status" name="status" (change)="getIssues(1)">
     <md-option *ngFor="let option of statusFilterOptions" [value]="option.value">{{ option.name }}</md-option>
 </md-select>
 

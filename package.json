@@ -12,6 +12,14 @@
   },
   "private": true,
   "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "morgan": "^1.8.1",
+    "plex-api": "^5.0.2",
+    "sequelize": "^3.30.4",
+    "sqlite3": "^3.1.8"
+  },
+  "devDependencies": {
     "@angular/animations": "^4.0.1",
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
@@ -23,21 +31,11 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
-    "body-parser": "^1.17.1",
     "core-js": "^2.4.1",
-    "express": "^4.15.2",
-    "http": "^0.0.0",
-    "morgan": "^1.8.1",
     "ngx-pagination": "^3.0.0",
-    "path": "^0.12.7",
-    "plex-api": "^5.0.2",
     "rxjs": "^5.1.0",
-    "sequelize": "^3.30.4",
-    "sqlite3": "^3.1.8",
     "supertest": "^3.0.0",
-    "zone.js": "^0.8.9"
-  },
-  "devDependencies": {
+    "zone.js": "^0.8.9",
     "@angular/cli": "^1.0.1",
     "@angular/compiler-cli": "^4.0.0",
     "@types/jasmine": "2.5.47",
