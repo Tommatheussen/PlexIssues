@@ -7,22 +7,28 @@ import 'rxjs/add/operator/map';
 
 import { Issue } from './issue';
 
+interface IServerResponse{
+  issues: Issue[],
+  count: number
+}
+
 @Injectable()
 export class IssueService {
   private IssueUrl: string = '/api/issue';
 
 	constructor(private http: Http) { }
 
-  getIssues(sort: string, status: string): Observable<Issue[]> {
+  getIssues(sort: string, status: string, page: number = 1): Observable<IServerResponse> {
     let params = new URLSearchParams();
     params.append('sort', sort);
     params.append('status', status);
+    params.append('page', page.toString());
 
     return this.http.get(this.IssueUrl, { search: params })
-			.map((res:Response) => res.json() as Issue[])
+			.map((res:Response) => res.json() as IServerResponse)
 		//	.catch(this.handleError);
   }
-  
+
   updateIssue(issue: Issue): Observable<Issue[]> {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -41,13 +47,7 @@ export class IssueService {
   }
 
 	getLatestIssues(): Observable<Issue[]> {
-		let params = new URLSearchParams();
-    params.append('limit', '5');
-    params.append('sort', 'openDate');
-    params.append('order', 'DESC');
-    params.append('status', 'new');
-
-		return this.http.get(this.IssueUrl, { search: params })
+		return this.http.get(`${this.IssueUrl}/latest`)
 			.map((res:Response) => res.json() as Issue[])
   }
 

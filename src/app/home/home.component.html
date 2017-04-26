@@ -1,3 +1,5 @@
-<h1>Newest issues</h1>
+<h1 fxLayout="row" fxLayoutAlign="center center">Newest issues</h1>
 <md-spinner *ngIf="!issues"></md-spinner>
-<plexissues-issues *ngIf="issues" [issues]="issues"></plexissues-issues>
+<div *ngIf="issues" fxFlexOffset="25" fxFlex="50">
+  <plexissues-issue [issue]="issue" *ngFor="let issue of issues"></plexissues-issue>
+</div>
