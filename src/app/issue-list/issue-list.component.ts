@@ -13,6 +13,7 @@ import { IssueService } from './../issue.service';
 })
 export class IssueListComponent implements OnInit {
   issues: Observable<Issue[]>;
+  loading: Boolean;
 
 
   p: number = 1;
@@ -66,12 +67,13 @@ export class IssueListComponent implements OnInit {
   }
 
   getIssues(page: number): void {
+    this.loading = true;
     this.issues = this.issueService.getIssues(this.sort, this.status, page)
       .do(res => {
         this.total = res.count;
         this.p = page;
+        this.loading = false;
       }).map(res => res.issues);
-      //.subscribe(issues => this.issues = issues);
   }
 
 }
