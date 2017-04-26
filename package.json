@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json",
+    "start": "concurrently \"nodemon server/server.js\" \"ng serve --proxy-config proxy.conf.json\" ",
     "build": "ng build",
     "test": "ng test --watch false && npm run api-test && npm run int-test",
     "api-test": "node_modules/.bin/cross-env NODE_ENV=test ./node_modules/.bin/mocha server/tests/unit/*.test.js",
@@ -43,6 +43,7 @@
     "@types/jasmine": "2.5.47",
     "@types/node": "~7.0.12",
     "codelyzer": "~3.0.0",
+    "concurrently": "^3.4.0",
     "cross-env": "^4.0.0",
     "expect.js": "^0.3.1",
     "jasmine": "^2.5.3",
