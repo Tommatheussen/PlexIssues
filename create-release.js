@@ -72,5 +72,4 @@ Object.keys(architectures).forEach(function (key) {
 
   console.log(`Finished package for ${key}`);
 }, this);
-
 process.exit(0);

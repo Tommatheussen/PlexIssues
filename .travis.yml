@@ -16,6 +16,7 @@ before_install:
 notifications:
   email: false
 
+
 before_deploy:
   - npm install shelljs
   - node ./create-release.js
