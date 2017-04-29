@@ -55,7 +55,7 @@
     "supertest": "^3.0.0",
     "ts-node": "~3.0.2",
     "tslint": "~5.1.0",
-    "typescript": "~2.2.0",
+    "typescript": "~2.3.1"
     "version-bump": "^0.1.0",
     "zone.js": "^0.8.9"
   }
