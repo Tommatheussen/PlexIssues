@@ -8,8 +8,10 @@ import { ToolbarComponent } from './toolbar.component';
 describe('ToolbarComponent', () => {
   let comp: ToolbarComponent;
   let fixture: ComponentFixture<ToolbarComponent>;
-  let de: DebugElement;
-  let el: HTMLElement;
+  let de: DebugElement[];
+  let homeBtn: HTMLElement;
+  let listBtn: HTMLElement;
+  let newBtn: HTMLElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -26,16 +28,25 @@ describe('ToolbarComponent', () => {
     fixture = TestBed.createComponent(ToolbarComponent);
     comp = fixture.componentInstance;
 
-    de = fixture.debugElement.query(By.css('h1'));
-    el = de.nativeElement;
-  })
+    de = fixture.debugElement.queryAll(By.css("a"));
+    homeBtn = de[0].nativeElement;
+    listBtn = de[1].nativeElement;
+    newBtn = de[2].nativeElement;
+  });
 
   it('should create the toolbar', () => {
     expect(comp).toBeTruthy();
   });
 
+  it('should have home button', () => {
+    expect(homeBtn.textContent).toContain('Latest Issues');
+  });
 
-  it('should have a header', () => {
-    expect(el.textContent).toEqual('Test');
+  it('should have list button', () => {
+    expect(listBtn.textContent).toContain('All Issues');
+  });
+
+  it('should have list button', () => {
+    expect(newBtn.textContent).toContain('New Issue');
   });
 });

@@ -13,7 +13,6 @@ import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { HomeComponent } from './home/home.component';
 import { IssueListComponent } from './issue-list/issue-list.component';
-import { IssuesComponent } from './issues/issues.component';
 import { IssueComponent } from './issue/issue.component';
 import { NewIssueComponent } from './new-issue/new-issue.component';
 import { SettingsComponent } from './settings/settings.component';
@@ -24,7 +23,6 @@ import { SettingsComponent } from './settings/settings.component';
     ToolbarComponent,
     HomeComponent,
     IssueListComponent,
-    IssuesComponent,
     IssueComponent,
     NewIssueComponent,
     SettingsComponent
@@ -37,7 +35,7 @@ import { SettingsComponent } from './settings/settings.component';
     ReactiveFormsModule,
     FlexLayoutModule,
     NgxPaginationModule,
-    MaterialModule.forRoot(),
+    MaterialModule,
     RouterModule.forRoot([
       {
         path: '',
@@ -59,6 +57,10 @@ import { SettingsComponent } from './settings/settings.component';
       {
         path: 'settings',
         component: SettingsComponent
+      },
+      {
+        path: '**',
+        redirectTo: '/home'
       }
     ])
   ],

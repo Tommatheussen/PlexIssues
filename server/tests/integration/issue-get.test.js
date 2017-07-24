@@ -5,17 +5,23 @@ var expect = require('expect.js');
 var BlueBird = require('bluebird');
 var request = require('supertest');
 
+before(function () {
+  return require('../../models').sequelize.sync();
+});
+
 describe('issue /GET endpoint', function () {
-  before(function () {
-    return require('../../models').sequelize.sync();
-  });
+  beforeEach(function () {
+    this.Issue = require('../../models').Issue;
+
+    return this.Issue.destroy({ truncate: true });
+  })
 
   it ('should return an empty list', function (done) {
-    request(app).get('/api/issue').expect(200, [], done);
+    request(app).get('/api/issue').expect(200, { count: 0, issues: [] }, done);
   });
 
   describe('with data', function () {
-    before(function () {
+    beforeEach(function () {
       this.Issue = require('../../models').Issue;
 
       return BlueBird.all([
@@ -26,13 +32,14 @@ describe('issue /GET endpoint', function () {
 
     it('should return 2 items', function (done) {
       request(app).get('/api/issue').expect(function (res) {
-        expect(res.body.length).to.equal(2);
+        expect(res.body.count).to.equal(2);
+        expect(res.body.issues.length).to.equal(2);
       }).end(done);
     });
   })
 
   describe('limited', function () {
-    before(function () {
+    beforeEach(function () {
       this.Issue = require('../../models').Issue;
 
       return BlueBird.all([
@@ -55,7 +62,8 @@ describe('issue /GET endpoint', function () {
 
     it('should return 10 items by default', function (done) {
       request(app).get('/api/issue').expect(function (res) {
-        expect(res.body.length).to.equal(10);
+        expect(res.body.count).to.equal(14);
+        expect(res.body.issues.length).to.equal(10);
       }).end(done);
     });
 
@@ -64,7 +72,8 @@ describe('issue /GET endpoint', function () {
         .get('/api/issue')
         .query({ limit: 5 })
         .expect(function (res) {
-          expect(res.body.length).to.equal(5);
+          expect(res.body.issues.length).to.equal(5);
+          expect(res.body.count).to.equal(14);
         })
         .end(done);
     });

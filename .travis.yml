@@ -16,6 +16,30 @@ before_install:
 notifications:
   email: false
 
+
+before_deploy:
+  - npm install shelljs
+  - node ./create-release.js
+
+deploy:
+  - provider: pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    target_branch: release
+    local_dir: release
+    on:
+      branch: master
+
+  - provider: releases
+    api_key: $GITHUB_TOKEN
+    file_glob: true
+    file: binaries/*
+    skip_cleanup: true
+    branch: master
+    on:
+      branch: master
+
 branches:
-  only:
-    - /^(?i:greenkeeper)\/.*$/
+  except:
+    - release
+    - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
