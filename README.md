@@ -7,9 +7,22 @@
 This project is created to allow users of Plex to centralize all their issues regarding content in 1 place.
 Allows easy creation of new issues and resolving/rejecting issues.
 
-First version is almost ready for use.
-
 ## Getting started
+### Download
+First of all, download the latest version. This can be done by 2 options:
+
+  - Download the latest release from Github, this includes a node binary, which can be used to start the application without the need to install node itself.
+  - Download the repository's release branch. This branch holds the latest code, without a node binary, useful if you have node installed on your system.
+
+### Setup
+After getting the code, the application needs to install some dependencies first. You can do this by running the `npm install --prod` command. If you're using the binaries, you should use npm referenced inside of the binaries (`./node/bin/npm`).
+
+### Start
+After the installation of the dependencies finished, you should be able to start the server. Simple run the command `node server/server.js --prod`. This will start the server which will be accessible at `localhost:3000`.
+
+
+
+## Development
 As a first step, get the code from Github.
 
 Next, install all dependencies, I use Yarn, but npm should work just fine as well (`yarn` or `npm install`).
@@ -29,3 +42,6 @@ The backend holds routing rules to direct `localhost:3000/` requests (and other 
 * Frontend: Angular, Angular Material, created using Angular-CLI
 * Backend: Express, Sequelize
 * Database: SQLite
+
+## Known issues
+Attempting to install the Sqlite3 package using the binaries, when another version of node is installed on the system, will result in the application not being able to import the package (since it builds for the system version then).

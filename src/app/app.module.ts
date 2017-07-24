@@ -33,7 +33,7 @@ import { NewIssueComponent } from './new-issue/new-issue.component';
     ReactiveFormsModule,
     FlexLayoutModule,
     NgxPaginationModule,
-    MaterialModule.forRoot(),
+    MaterialModule,
     RouterModule.forRoot([
       {
         path: '',
