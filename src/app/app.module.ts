@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxPaginationModule } from 'ngx-pagination';
 
@@ -17,6 +17,39 @@ import { IssueComponent } from './issue/issue.component';
 import { NewIssueComponent } from './new-issue/new-issue.component';
 import { SettingsComponent } from './settings/settings.component';
 
+import { LoginComponent } from './login/login.component';
+
+import { PrivateComponent } from './private.component';
+
+class SettingsGuard implements CanActivate {
+  canActivate() {
+    console.log('Can activate?');
+    return false;
+  }
+}
+
+const routes = [
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: '',
+    component: PrivateComponent,
+    canActivate: [SettingsGuard],
+    children: [
+      {
+        path: 'home',
+        component: HomeComponent
+      },
+      {
+        path: 'settings',
+        component: SettingsComponent
+      }
+    ]
+  }
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,46 +58,24 @@ import { SettingsComponent } from './settings/settings.component';
     IssueListComponent,
     IssueComponent,
     NewIssueComponent,
-    SettingsComponent
+    SettingsComponent,
+    LoginComponent,
+    PrivateComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-	  HttpModule,
+    HttpModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
     NgxPaginationModule,
     MaterialModule,
-    RouterModule.forRoot([
-      {
-        path: '',
-        redirectTo: '/home',
-        pathMatch: 'full'
-      },
-      {
-        path: 'home',
-        component: HomeComponent
-      },
-      {
-        path: 'list',
-        component: IssueListComponent
-      },
-      {
-        path: 'new',
-        component: NewIssueComponent
-      },
-      {
-        path: 'settings',
-        component: SettingsComponent
-      },
-      {
-        path: '**',
-        redirectTo: '/home'
-      }
-    ])
+    RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    SettingsGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
