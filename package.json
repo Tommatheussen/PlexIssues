@@ -26,6 +26,7 @@
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "morgan": "^1.8.2",
+    "ngx-webstorage": "^1.8.0",
     "plex-api": "^5.1.0",
     "request": "^2.81.0",
     "request-promise-native": "^1.0.4",

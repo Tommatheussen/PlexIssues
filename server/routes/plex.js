@@ -10,6 +10,7 @@ var plexClient = new plexAPI(require('../config/plex.json'));
 
 router.post('/login', async (req, res) => {
   //TODO: send request to Plex, and save token
+  // TODO: Create library for interaction maybe?
   // https://plex.tv/users/sign_in.json
   // https://github.com/Arcanemagus/plex-api/wiki/Plex.tv
   // https://github.com/phillipj/node-plex-api/blob/master/lib/api.js
@@ -34,9 +35,14 @@ router.post('/login', async (req, res) => {
     }
   }
 
-  let loginResult = await rp(loginOptions);
-  console.log(loginResult);
+  try {
+    let loginResult = await rp(loginOptions);
+    return res.send({ token: loginResult.user.authToken });
+  } catch (err) {
+    return res.status(400).send(err);
+  }
 
+/*
   let devicesOptions = {
     method: 'GET',
     uri: '	https://plex.tv/devices.xml',
@@ -48,8 +54,7 @@ router.post('/login', async (req, res) => {
 
   let devicesResult = await rp(devicesOptions);
   console.log(devicesResult);
-
-  res.send();
+*/
 });
 
 router.get('/search', (req, res) => {
