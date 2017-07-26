@@ -23,25 +23,20 @@ import { AuthService } from './auth.service';
 
 import { Ng2Webstorage } from 'ngx-webstorage';
 
-class SettingsGuard implements CanActivate {
-  //constructor(private authService: AuthService) { }
-
-  canActivate() {
-    console.log('Can activate?');
-    //return this.authService.loggedIn;
-    return false;
-  }
-}
+import { AuthGuard } from './auth-guard.service';
+import { LoggedInGuard } from './logged-in-guard.service';
+//import { AppRoutingModule } from './app-routing.module';
 
 const appRoutes = [
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [LoggedInGuard]
   },
   {
     path: '',
    // component: PrivateComponent,
-    canActivate: [SettingsGuard],
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'home',
@@ -67,6 +62,7 @@ const appRoutes = [
     LoginComponent
   ],
   imports: [
+    //AppRoutingModule,
     BrowserModule,
     FormsModule,
     HttpModule,
@@ -79,7 +75,8 @@ const appRoutes = [
     Ng2Webstorage.forRoot({ prefix: 'plexissues' })
   ],
   providers: [
-    SettingsGuard,
+    AuthGuard,
+    LoggedInGuard,
     AuthService
   ],
   bootstrap: [AppComponent]
