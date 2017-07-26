@@ -4,8 +4,10 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently \"nodemon server/server.js\" \"ng serve --proxy-config proxy.conf.json\" ",
+    "start": "concurrently \"npm run start-api\" \"npm run start-ui\" ",
     "build": "ng build",
+    "start-api": "npx nodemon server/server.js",
+    "start-ui": "npx ng serve --proxy-config proxy.conf.json",
     "test": "ng test --watch false && npm run api-test && npm run int-test",
     "api-test": "node_modules/.bin/cross-env NODE_ENV=test ./node_modules/.bin/mocha server/tests/unit/*.test.js",
     "int-test": "node_modules/.bin/cross-env NODE_ENV=test ./node_modules/.bin/mocha server/tests/integration/*.test.js"
@@ -25,6 +27,8 @@
     "express": "^4.15.3",
     "morgan": "^1.8.2",
     "plex-api": "^5.1.0",
+    "request": "^2.81.0",
+    "request-promise-native": "^1.0.4",
     "sequelize": "^4.3.2",
     "sqlite3": "^3.1.8"
   },
