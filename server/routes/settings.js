@@ -15,4 +15,14 @@ router.get('/', (req, res) => {
   });
 });
 
+router.get('/initial', (req, res) => {
+  Settings.findOne({
+    where: {
+      name: 'hostname'
+    }
+  }).then(settings => {
+    return res.json(settings ? true : false);
+  });
+});
+
 module.exports = router;

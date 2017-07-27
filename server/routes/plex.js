@@ -6,7 +6,7 @@ const plexAPI = require('plex-api');
 
 const rp = require('request-promise');
 
-var plexClient = new plexAPI(require('../config/plex.json'));
+//var plexClient = new plexAPI(require('../config/plex.json'));
 
 router.post('/login', async (req, res) => {
   //TODO: send request to Plex, and save token

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER  } from '@angular/core';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,6 +16,7 @@ import { IssueListComponent } from './issue-list/issue-list.component';
 import { IssueComponent } from './issue/issue.component';
 import { NewIssueComponent } from './new-issue/new-issue.component';
 import { SettingsComponent } from './settings/settings.component';
+import { SetupComponent } from './setup/setup.component';
 
 import { LoginComponent } from './login/login.component';
 
@@ -24,29 +25,42 @@ import { AuthService } from './auth.service';
 import { Ng2Webstorage } from 'ngx-webstorage';
 
 import { AuthGuard } from './auth-guard.service';
-import { LoggedInGuard } from './logged-in-guard.service';
+import { SetupGuard } from './setup-guard.service';
+
 //import { AppRoutingModule } from './app-routing.module';
+
+import { AppConfig } from './app.config';
 
 const appRoutes = [
   {
-    path: 'login',
-    component: LoginComponent,
-    canActivate: [LoggedInGuard]
-  },
-  {
     path: '',
-   // component: PrivateComponent,
-    canActivate: [AuthGuard],
+    canActivate: [SetupGuard],
     children: [
       {
-        path: 'home',
-        component: HomeComponent
+        path: 'login',
+        component: LoginComponent,
+        canActivate: [AuthGuard]
       },
       {
-        path: 'settings',
-        component: SettingsComponent
+        path: '',
+        canActivate: [AuthGuard],
+        children: [
+          {
+            path: 'home',
+            component: HomeComponent
+          },
+          {
+            path: 'settings',
+            component: SettingsComponent
+          }
+        ]
       }
     ]
+  },
+  {
+    path: 'setup',
+    canActivate: [SetupGuard],
+    component: SetupComponent
   }
 ];
 
@@ -59,7 +73,8 @@ const appRoutes = [
     IssueComponent,
     NewIssueComponent,
     SettingsComponent,
-    LoginComponent
+    LoginComponent,
+    SetupComponent
   ],
   imports: [
     //AppRoutingModule,
@@ -76,8 +91,10 @@ const appRoutes = [
   ],
   providers: [
     AuthGuard,
-    LoggedInGuard,
-    AuthService
+    SetupGuard,
+    AuthService,
+    AppConfig,
+    { provide: APP_INITIALIZER, useFactory: (config: AppConfig) => () => config.load(), deps: [AppConfig], multi: true }
   ],
   bootstrap: [AppComponent]
 })
