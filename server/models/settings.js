@@ -6,14 +6,14 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       primaryKey: true
     },
-    name: {
+    hostname: {
       type: DataTypes.STRING,
       required: true
     },
-    value: {
-      type: DataTypes.STRING,
+    port: {
+      type: DataTypes.INTEGER,
       required: true
-    }
+    },
   }, { timestamps: false });
 
   return Settings;
