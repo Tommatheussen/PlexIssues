@@ -14,6 +14,11 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       required: true
     },
+    login: {
+      type: DataTypes.BOOLEAN,
+      required: true,
+      default: false
+    }
   }, { timestamps: false });
 
   return Settings;
