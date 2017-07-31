@@ -15,7 +15,6 @@ import { HomeComponent } from './home/home.component';
 import { IssueListComponent } from './issue-list/issue-list.component';
 import { IssueComponent } from './issue/issue.component';
 import { NewIssueComponent } from './new-issue/new-issue.component';
-import { SettingsComponent } from './settings/settings.component';
 import { SetupComponent } from './setup/setup.component';
 
 import { LoginComponent } from './login/login.component';
@@ -27,42 +26,9 @@ import { Ng2Webstorage } from 'ngx-webstorage';
 import { AuthGuard } from './auth-guard.service';
 import { SetupGuard } from './setup-guard.service';
 
-//import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppConfig } from './app.config';
-
-const appRoutes = [
-  {
-    path: '',
-    canActivate: [SetupGuard],
-    children: [
-      {
-        path: 'login',
-        component: LoginComponent,
-        canActivate: [AuthGuard]
-      },
-      {
-        path: '',
-        canActivate: [AuthGuard],
-        children: [
-          {
-            path: 'home',
-            component: HomeComponent
-          },
-          {
-            path: 'settings',
-            component: SettingsComponent
-          }
-        ]
-      }
-    ]
-  },
-  {
-    path: 'setup',
-    canActivate: [SetupGuard],
-    component: SetupComponent
-  }
-];
 
 @NgModule({
   declarations: [
@@ -72,12 +38,11 @@ const appRoutes = [
     IssueListComponent,
     IssueComponent,
     NewIssueComponent,
-    SettingsComponent,
     LoginComponent,
     SetupComponent
   ],
   imports: [
-    //AppRoutingModule,
+    AppRoutingModule,
     BrowserModule,
     FormsModule,
     HttpModule,
@@ -86,7 +51,6 @@ const appRoutes = [
     FlexLayoutModule,
     NgxPaginationModule,
     MaterialModule,
-    RouterModule.forRoot(appRoutes),
     Ng2Webstorage.forRoot({ prefix: 'plexissues' })
   ],
   providers: [
