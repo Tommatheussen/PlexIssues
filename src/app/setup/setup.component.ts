@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Http, Headers, Response } from '@angular/http';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'plexissues-setup',
   templateUrl: './setup.component.html',
@@ -10,7 +12,7 @@ import { Http, Headers, Response } from '@angular/http';
 export class SetupComponent implements OnInit {
   setupForm: FormGroup;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private router: Router) { }
 
   ngOnInit() {
     this.setupForm = new FormGroup({
@@ -27,10 +29,8 @@ export class SetupComponent implements OnInit {
       this.http.post('/api/settings/setup', JSON.stringify({
         hostname: this.setupForm.value.hostname, port: this.setupForm.value.port
       }), { headers: headers })
-        .map((res: Response) => {
-          console.log(res.json());
-        }).subscribe(res => {
-          console.log(res);
+        .subscribe(res => {
+          this.router.navigate(['/login']);
         });
     }
   }
