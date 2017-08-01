@@ -34,10 +34,20 @@ export class PlexService {
   }
 
   getPlexItem(key: string): Observable<PlexItem> {
-    let params = new URLSearchParams();
-    params.append('key', key);
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
 
-    return this.http.get(this.PlexUrl, { search: params })
+    const settings = this.storage.retrieve('setup');
+    const token = this.storage.retrieve('token');
+
+    return this.http.post(this.PlexUrl,
+      JSON.stringify({
+        key,
+        host: settings.hostname,
+        port: settings.port,
+        token
+      })
+    , { headers })
       .map((res: Response) => res.json() as PlexItem);
   }
 };

@@ -9,23 +9,12 @@ const rp = require('request-promise');
 //var plexClient = new plexAPI(require('../config/plex.json'));
 
 router.post('/login', async (req, res) => {
-  //TODO: send request to Plex, and save token
-  // TODO: Create library for interaction maybe?
-  // https://plex.tv/users/sign_in.json
-  // https://github.com/Arcanemagus/plex-api/wiki/Plex.tv
-  // https://github.com/phillipj/node-plex-api/blob/master/lib/api.js
+  let headers = getHeaders();
+
   let loginOptions = {
     method: 'POST',
     uri: 'https://plex.tv/users/sign_in.json',
-    headers: {
-      'X-Plex-Platform': os.platform(),
-      'X-Plex-Platform-Version': os.release(),
-      'X-Plex-Client-Identifier': 'PlexIssues',
-      'X-Plex-Product': 'Plex Issues',
-      'X-Plex-Version': '0.1',
-      'X-Plex-Device': 'Plex Issues',
-      'X-Plex-Device-Name': 'Plex Issues'
-    },
+    headers: headers,
     json: true,
     body: {
       user: {
@@ -44,19 +33,13 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/search', async (req, res) => {
+  let headers = getHeaders();
+  headers['X-Plex-Token'] = req.body.token;
+
   let searchOptions = {
     method: 'GET',
     uri: `http://${req.body.host}:${req.body.port}/search`,
-    headers: {
-      'X-Plex-Platform': os.platform(),
-      'X-Plex-Platform-Version': os.release(),
-      'X-Plex-Client-Identifier': 'PlexIssues',
-      'X-Plex-Product': 'Plex Issues',
-      'X-Plex-Version': '0.1',
-      'X-Plex-Device': 'Plex Issues',
-      'X-Plex-Device-Name': 'Plex Issues',
-      'X-Plex-Token': req.body.token
-    },
+    headers: headers,
     json: true,
     qs: {
       query: req.body.search
@@ -72,14 +55,39 @@ router.post('/search', async (req, res) => {
   };
 });
 
-router.get('/', (req, res) => {
-  let key = req.query.key;
+router.post('/', async (req, res) => {
+  let key = req.body.key;
 
-  plexClient.query(`/library/metadata/${key}`).then(function (response) {
-    res.json(response.MediaContainer.Metadata[0] || [])
-  }, function (error) {
-    res.status(400).send(error);
-  });
-})
+  let headers = getHeaders();
+  headers['X-Plex-Token'] = req.body.token;
+
+  let metadataOptions = {
+    method: 'GET',
+    uri: `http://${req.body.host}:${req.body.port}/library/metadata/${key}`,
+    headers: headers,
+    json: true
+  }
+
+  try {
+    let metadataResult = await rp(metadataOptions);
+    console.log(metadataResult);
+    return res.send(metadataResult.MediaContainer.Metadata || []);
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send(err);
+  };
+});
+
+function getHeaders() {
+  return {
+    'X-Plex-Platform': os.platform(),
+    'X-Plex-Platform-Version': os.release(),
+    'X-Plex-Client-Identifier': require('../config/plex.json').identifier,
+    'X-Plex-Product': require('../config/plex.json').product,
+    'X-Plex-Version': require('../config/plex.json').version,
+    'X-Plex-Device': require('../config/plex.json').device,
+    'X-Plex-Device-Name': require('../config/plex.json').device
+  }
+}
 
 module.exports = router;
