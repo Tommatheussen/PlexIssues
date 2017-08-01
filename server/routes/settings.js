@@ -5,7 +5,7 @@ const Settings = require('../models').Settings;
 
 router.get('/initial', (req, res) => {
   Settings.findAll().then(settings => {
-    return res.json(settings.length > 0 ? { login: settings[0].login }: false);
+    return res.json({ settings: settings[0] });
   });
 });
 
