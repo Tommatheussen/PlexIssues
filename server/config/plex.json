@@ -1,7 +1,6 @@
 {
-  "options": {
-    "identifier": "plexIssues",
-    "product": "Plex Issues",
-    "deviceName": "Plex Issues"
-  }
+  "identifier": "plexIssues",
+  "product": "Plex Issues",
+  "device": "Plex Issues",
+  "version": "0.1"
 }
