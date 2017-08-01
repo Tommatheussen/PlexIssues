@@ -8,5 +8,5 @@ import { NgIf } from '@angular/common';
   styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent {
-  constructor(private authService: AuthService) { }
+  constructor(public authService: AuthService) { }
 }

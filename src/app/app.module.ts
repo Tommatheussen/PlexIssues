@@ -58,8 +58,17 @@ import { AppConfig } from './app.config';
     SetupGuard,
     AuthService,
     AppConfig,
-    { provide: APP_INITIALIZER, useFactory: (config: AppConfig) => () => config.load(), deps: [AppConfig], multi: true }
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initConfiguration,
+      deps: [AppConfig],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function initConfiguration(config: AppConfig): Function {
+  return () => config.load();
+}

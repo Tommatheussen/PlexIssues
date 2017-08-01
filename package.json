@@ -23,6 +23,7 @@
   },
   "private": true,
   "dependencies": {
+    "@ngtools/webpack": "^1.5.5",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "morgan": "^1.8.2",
@@ -31,12 +32,10 @@
     "request": "^2.81.0",
     "request-promise-native": "^1.0.4",
     "sequelize": "^4.3.2",
-    "sqlite3": "^3.1.8"
-  },
-  "devDependencies": {
+    "sqlite3": "^3.1.8",
     "@angular/animations": "^4.0.1",
     "@angular/cdk": "^2.0.0-beta.8",
-    "@angular/cli": "^1.0.1",
+    "@angular/cli": "^1.2.6",
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
     "@angular/compiler-cli": "^4.0.0",
@@ -73,5 +72,6 @@
     "typescript": "~2.4.1",
     "version-bump": "^0.1.0",
     "zone.js": "^0.8.9"
-  }
+  },
+  "devDependencies": {}
 }
