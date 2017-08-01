@@ -19,7 +19,7 @@ describe('ToolbarComponent', () => {
         ToolbarComponent
       ],
       imports: [
-        MaterialModule.forRoot()
+        MaterialModule
       ]
     }).compileComponents();
   }));
