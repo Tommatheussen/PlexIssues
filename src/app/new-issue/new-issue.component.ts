@@ -40,11 +40,11 @@ export class NewIssueComponent implements OnInit {
     private issueService: IssueService,
     private plexService: PlexService,
     private _fb: FormBuilder
-  ) { } 
-  
+  ) { }
+
   ngOnInit() {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
+    // Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    // Add 'implements OnInit' to the class.
     this.issueForm = this._fb.group({
       plexitem: ['', <any>Validators.required],
       type: ['', <any>Validators.required],
@@ -56,7 +56,7 @@ export class NewIssueComponent implements OnInit {
       .startWith(null)
       .switchMap(name => this.getPlexItems(name));
   }
-  
+
   getPlexItems(val: string):Observable<PlexItem[]> {
     return val ? this.plexService.searchPlex(val) : Observable.from([]);
   }
@@ -68,7 +68,7 @@ export class NewIssueComponent implements OnInit {
     newIssue.item = model.plexitem.ratingKey;
 
     this.issueService.addIssue(newIssue)
-      .subscribe(() => { 
+      .subscribe(() => {
         this.issueForm.reset();
       });
   }
