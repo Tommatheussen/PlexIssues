@@ -70,8 +70,7 @@ router.post('/', async (req, res) => {
 
   try {
     let metadataResult = await rp(metadataOptions);
-    console.log(metadataResult);
-    return res.send(metadataResult.MediaContainer.Metadata || []);
+    return res.send(metadataResult.MediaContainer.Metadata[0] || []);
   } catch (err) {
     console.log(err);
     return res.status(400).send(err);
