@@ -7,6 +7,9 @@ import { AuthGuard } from './auth-guard.service';
 import { SetupGuard } from './setup-guard.service';
 import { SetupComponent } from './setup/setup.component';
 
+import { NewIssueComponent } from './new-issue/new-issue.component';
+import { IssueListComponent } from './issue-list/issue-list.component';
+
 const appRoutes = [
   {
     path: '',
@@ -21,6 +24,15 @@ const appRoutes = [
         path: '',
         canActivate: [AuthGuard],
         children: [
+          {
+            path: 'new',
+            component: NewIssueComponent
+          },
+
+          {
+            path: 'list',
+          component: IssueListComponent
+        },
           {
             path: 'home',
             component: HomeComponent
