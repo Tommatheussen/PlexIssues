@@ -9,6 +9,6 @@
   },
   "production": {
     "dialect": "sqlite",
-    "storage": "./plexissues.sqlite"
+    "storage": "plexissues.sqlite"
   }
 }

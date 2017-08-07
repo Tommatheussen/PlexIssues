@@ -5,6 +5,11 @@ var path = require('path');
 var Sequelize = require('sequelize');
 var env = process.env.NODE_ENV || 'development';
 var config = require('../config/database.json')[env];
+
+if (env === 'production') {
+  config.storage = path.join(path.dirname(process.execPath), config.storage);
+}
+
 config.typeValidation = true;
 config.logging = (env == 'development' ? function (string, val) { console.log(string); } : false);
 
