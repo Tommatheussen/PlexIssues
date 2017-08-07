@@ -20,6 +20,9 @@
     ],
     "scripts": [
       "server/server.js"
+    ],
+    "targets": [
+      "node8-win-x64"
     ]
   },
   "private": true,
@@ -66,6 +69,7 @@
     "request": "^2.81.0",
     "request-promise-native": "^1.0.4",
     "sequelize": "^4.4.2",
+    "shelljs": "^0.7.8",
     "sqlite3": "^3.1.9",
     "supertest": "^3.0.0",
     "ts-node": "~3.3.0",
