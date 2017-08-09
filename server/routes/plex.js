@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const os = require('os');
 
-const plexAPI = require('plex-api');
-
 const rp = require('request-promise');
 
 //var plexClient = new plexAPI(require('../config/plex.json'));
