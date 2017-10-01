@@ -44,3 +44,4 @@ Thumbs.db
 /server/config.js
 /binaries
 /release
+*.sqlite
