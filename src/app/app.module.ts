@@ -7,7 +7,7 @@ import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxPaginationModule } from 'ngx-pagination';
 
-import { MaterialModule } from '@angular/material';
+import { PlexIssuesMaterialModule } from './material/material.module';
 
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -50,7 +50,7 @@ import { AppConfig } from './app.config';
     ReactiveFormsModule,
     FlexLayoutModule,
     NgxPaginationModule,
-    MaterialModule,
+    PlexIssuesMaterialModule,
     Ng2Webstorage.forRoot({ prefix: 'plexissues' })
   ],
   providers: [
