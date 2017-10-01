@@ -14,8 +14,6 @@ import { IssueListComponent } from './issue-list/issue-list.component';
 import { IssueComponent } from './issue/issue.component';
 import { NewIssueComponent } from './new-issue/new-issue.component';
 
-import { LoginComponent } from './login/login.component';
-
 import { AuthService } from './auth.service';
 
 import { Ng2Webstorage } from 'ngx-webstorage';
@@ -28,6 +26,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppConfig } from './app.config';
 
 import { SetupModule } from './setup/setup.module';
+import { LoginModule } from './login/login.module';
 
 import { PlexIssuesSharedModule } from './shared/shared.module';
 
@@ -42,6 +41,7 @@ import { PlexIssuesSharedModule } from './shared/shared.module';
 
 
     SetupModule,
+    LoginModule,
 
     HttpModule,
     NgxPaginationModule,
@@ -53,8 +53,7 @@ import { PlexIssuesSharedModule } from './shared/shared.module';
     HomeComponent,
     IssueListComponent,
     IssueComponent,
-    NewIssueComponent,
-    LoginComponent
+    NewIssueComponent
   ],
   providers: [
     AuthGuard,

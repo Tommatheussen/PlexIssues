@@ -10,15 +10,15 @@ import { SetupComponent } from './setup/setup.component';
 import { NewIssueComponent } from './new-issue/new-issue.component';
 import { IssueListComponent } from './issue-list/issue-list.component';
 
-const appRoutes = [
+const appRoutes: Routes = [
   {
     path: '',
     canActivate: [SetupGuard],
     children: [
       {
         path: 'login',
-        component: LoginComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        loadChildren: './login/login.module#LoginModule'
       },
       {
         path: '',
