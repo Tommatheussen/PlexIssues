@@ -7,15 +7,12 @@ import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxPaginationModule } from 'ngx-pagination';
 
-import { PlexIssuesMaterialModule } from './material/material.module';
-
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { HomeComponent } from './home/home.component';
 import { IssueListComponent } from './issue-list/issue-list.component';
 import { IssueComponent } from './issue/issue.component';
 import { NewIssueComponent } from './new-issue/new-issue.component';
-import { SetupComponent } from './setup/setup.component';
 
 import { LoginComponent } from './login/login.component';
 
@@ -30,7 +27,26 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppConfig } from './app.config';
 
+import { SetupModule } from './setup/setup.module';
+
+import { PlexIssuesSharedModule } from './shared/shared.module';
+
 @NgModule({
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+
+    AppRoutingModule,
+
+    PlexIssuesSharedModule,
+
+
+    SetupModule,
+
+    HttpModule,
+    NgxPaginationModule,
+    Ng2Webstorage.forRoot({ prefix: 'plexissues' })
+  ],
   declarations: [
     AppComponent,
     ToolbarComponent,
@@ -38,20 +54,7 @@ import { AppConfig } from './app.config';
     IssueListComponent,
     IssueComponent,
     NewIssueComponent,
-    LoginComponent,
-    SetupComponent
-  ],
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    FlexLayoutModule,
-    NgxPaginationModule,
-    PlexIssuesMaterialModule,
-    Ng2Webstorage.forRoot({ prefix: 'plexissues' })
+    LoginComponent
   ],
   providers: [
     AuthGuard,

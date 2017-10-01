@@ -44,7 +44,7 @@ const appRoutes = [
   {
     path: 'setup',
     canActivate: [SetupGuard],
-    component: SetupComponent
+    loadChildren: './setup/setup.module#SetupModule'
   }
 ];
 

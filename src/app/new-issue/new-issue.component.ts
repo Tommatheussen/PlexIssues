@@ -56,7 +56,7 @@ export class NewIssueComponent implements OnInit {
       .switchMap(name => this.getPlexItems(name));
   }
 
-  getPlexItems(val: string):Observable<PlexItem[]> {
+  getPlexItems(val: string): Observable<PlexItem[]> {
     return val ? this.plexService.searchPlex(val) : Observable.from([]);
   }
 
