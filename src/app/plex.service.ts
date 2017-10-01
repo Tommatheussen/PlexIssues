@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Rx';
 
 import 'rxjs/add/operator/map';
 
-import { PlexItem } from './plex-item';
+import { PlexItem } from '@models';
 
 import { SessionStorageService } from 'ngx-webstorage';
 

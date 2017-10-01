@@ -3,7 +3,7 @@ import { Http, Response, URLSearchParams } from '@angular/http';
 
 import { Observable } from 'rxjs';
 
-import { Settings } from './settings';
+import { Settings } from '@models';
 
 @Injectable()
 export class SettingsService {

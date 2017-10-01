@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { Issue } from '../issue';
-import { PlexItem } from '../plex-item';
+import { Issue, PlexItem } from '@models';
 
 import { IssueService } from '../issue.service';
 import { PlexService } from '../plex.service';

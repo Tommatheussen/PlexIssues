@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { Issue } from './../issue';
+import { Issue } from '@models';
 import { IssueService } from './../issue.service';
 
 @Component({

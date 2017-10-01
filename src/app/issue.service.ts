@@ -5,9 +5,9 @@ import { Observable } from 'rxjs/Rx';
 
 import 'rxjs/add/operator/map';
 
-import { Issue } from './issue';
+import { Issue } from '@models';
 
-interface IServerResponse{
+interface IServerResponse {
   issues: Issue[],
   count: number
 }
@@ -16,7 +16,7 @@ interface IServerResponse{
 export class IssueService {
   private IssueUrl: string = '/api/issue';
 
-	constructor(private http: Http) { }
+  constructor(private http: Http) { }
 
   getIssues(sort: string, status: string, page: number = 1): Observable<IServerResponse> {
     let params = new URLSearchParams();
@@ -25,8 +25,8 @@ export class IssueService {
     params.append('page', page.toString());
 
     return this.http.get(this.IssueUrl, { search: params })
-			.map((res:Response) => res.json() as IServerResponse)
-		//	.catch(this.handleError);
+      .map((res: Response) => res.json() as IServerResponse)
+    //	.catch(this.handleError);
   }
 
   updateIssue(issue: Issue): Observable<Issue[]> {
@@ -34,8 +34,8 @@ export class IssueService {
     headers.append('Content-Type', 'application/json');
 
     return this.http.put(`${this.IssueUrl}/${issue.id}`, JSON.stringify(issue), { headers: headers })
-      .map((res:Response) => res.json())
-     // .catch(this.handleError);
+      .map((res: Response) => res.json())
+    // .catch(this.handleError);
   }
 
   addIssue(issue: Issue): Observable<Issue> {
@@ -46,18 +46,18 @@ export class IssueService {
       .map((res: Response) => res.json())
   }
 
-	getLatestIssues(): Observable<Issue[]> {
-		return this.http.get(`${this.IssueUrl}/latest`)
-			.map((res:Response) => res.json() as Issue[])
+  getLatestIssues(): Observable<Issue[]> {
+    return this.http.get(`${this.IssueUrl}/latest`)
+      .map((res: Response) => res.json() as Issue[])
   }
 
   removeIssue(issue): void {
     return;
   }
 
-	private handleError(error: any): Promise<any> {
-		console.error('An error occurred', error); // for demo purposes only
-		return Promise.reject(error.message || error);
-	}
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
+  }
 
 }

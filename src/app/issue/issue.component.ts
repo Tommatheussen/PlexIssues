@@ -1,7 +1,6 @@
 import { Component,  Input, OnInit } from '@angular/core';
 
-import { Issue } from '../issue';
-import { PlexItem } from '../plex-item';
+import { Issue, PlexItem } from '@models';
 
 import { IssueService } from '../issue.service';
 import { PlexService } from '../plex.service';
@@ -18,7 +17,7 @@ import { PlexService } from '../plex.service';
 export class IssueComponent implements OnInit{
   @Input() issue: Issue;
 
-  public loading: boolean = true;  
+  public loading: boolean = true;
   public metadata: PlexItem;
 
   dict: { [index: string]: string; } = {

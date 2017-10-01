@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Issue } from './../issue';
+import { Issue } from '@models';
 import { IssueService } from './../issue.service';
 
 @Component({
@@ -21,5 +21,5 @@ export class HomeComponent implements OnInit {
   getLatestIssues(): void {
     this.issueService.getLatestIssues()
       .subscribe(issues => this.issues = issues);
-  }  
+  }
 }
