@@ -68,12 +68,12 @@ export class IssueListComponent implements OnInit {
 
   getIssues(page: number): void {
     this.loading = true;
-    this.issues = this.issueService.getIssues(this.sort, this.status, page)
+   /* this.issues = this.issueService.getIssues(this.sort, this.status, page)
       .do(res => {
         this.total = res.count;
         this.p = page;
         this.loading = false;
-      }).map(res => res.issues);
+      }).map(res => res.issues);*/
   }
 
 }

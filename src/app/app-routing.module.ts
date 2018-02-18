@@ -10,6 +10,8 @@ import { SetupComponent } from './setup/setup.component';
 import { NewIssueComponent } from './new-issue/new-issue.component';
 import { IssueListComponent } from './issue-list/issue-list.component';
 
+import { ShellComponent } from './shell/shell.component';
+
 const appRoutes: Routes = [
   {
     path: '',
@@ -22,20 +24,20 @@ const appRoutes: Routes = [
       },
       {
         path: '',
+        component: ShellComponent,
         canActivate: [AuthGuard],
         children: [
+          {
+            path: '',
+            component: HomeComponent
+          },
           {
             path: 'new',
             component: NewIssueComponent
           },
-
           {
             path: 'list',
-          component: IssueListComponent
-        },
-          {
-            path: 'home',
-            component: HomeComponent
+            component: IssueListComponent
           }
         ]
       }
@@ -49,11 +51,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(appRoutes)
-  ],
-  exports: [
-    RouterModule
-  ]
+  imports: [RouterModule.forRoot(appRoutes)],
+  exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

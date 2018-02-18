@@ -2,23 +2,30 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
 import { SessionStorageService } from 'ngx-webstorage';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class AppConfig {
-  constructor(private http: Http, private storage: SessionStorageService) { }
+  constructor(private http: HttpClient, private storage: SessionStorageService) {}
 
   public load(): Promise<boolean> {
     return new Promise((resolve, reject) => {
       if (!this.storage.retrieve('setup')) {
-        return this.http.get('/api/settings/initial')
-          .map((res: Response) => res.json())
+        return this.http
+          .get<{ status: string }>('/api/settings/initial')
           .toPromise()
-          .then(setupResult => {
-            if (setupResult.settings) {
-              this.storage.store('setup', setupResult.settings);
+          .then(
+            setupResult => {
+              if (setupResult.status && setupResult.status === 'exists') {
+                this.storage.store('setup', true);
+              }
+              resolve(true);
+            },
+            error => {
+              console.log(error);
+              resolve(false);
             }
-            resolve(true);
-          });
+          );
       } else {
         resolve(true);
       }

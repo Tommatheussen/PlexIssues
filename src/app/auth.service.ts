@@ -12,7 +12,7 @@ export class AuthService {
 
   constructor(private http: Http, private storage: SessionStorageService) {
     this.authToken = this.storage.retrieve('token');
-    if (this.authToken) { this.loggedIn = true; }
+    if (this.authToken) { this.loggedIn = true; } // TODO: Check token valid
   }
 
   login(username: string, password: string): Observable<boolean> {

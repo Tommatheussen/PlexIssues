@@ -1,42 +1,51 @@
 import { NgModule } from '@angular/core';
 
 import {
-  MdAutocompleteModule,
-  MdButtonModule,
-  MdCardModule,
-  MdChipsModule,
-  MdFormFieldModule,
-  MdIconModule,
-  MdInputModule,
-  MdOptionModule,
-  MdSelectModule,
-  MdToolbarModule
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatCardModule,
+  MatChipsModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatOptionModule,
+  MatSelectModule,
+  MatToolbarModule,
+  MatSidenavModule,
+  MatTabsModule,
+  MatListModule
 } from '@angular/material';
 
 @NgModule({
   imports: [
-    MdAutocompleteModule,
-    MdButtonModule,
-    MdCardModule,
-    MdChipsModule,
-    MdFormFieldModule,
-    MdIconModule,
-    MdInputModule,
-    MdOptionModule,
-    MdSelectModule,
-    MdToolbarModule
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatCardModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatTabsModule,
+    MatListModule
   ],
   exports: [
-    MdAutocompleteModule,
-    MdButtonModule,
-    MdCardModule,
-    MdChipsModule,
-    MdFormFieldModule,
-    MdIconModule,
-    MdInputModule,
-    MdOptionModule,
-    MdSelectModule,
-    MdToolbarModule
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatCardModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatTabsModule,
+    MatListModule
   ]
 })
 export class PlexIssuesMaterialModule { }

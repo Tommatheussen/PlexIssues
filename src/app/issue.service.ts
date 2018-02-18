@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, URLSearchParams, Headers } from '@angular/http';
 
+import { HttpClient } from '@angular/common/http';
+
 import { Observable } from 'rxjs/Rx';
 
 import 'rxjs/add/operator/map';
@@ -16,16 +18,17 @@ interface IServerResponse {
 export class IssueService {
   private IssueUrl: string = '/api/issue';
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private _http: HttpClient) { }
 
-  getIssues(sort: string, status: string, page: number = 1): Observable<IServerResponse> {
+  getIssues(): Observable<Issue[]> {
     let params = new URLSearchParams();
-    params.append('sort', sort);
-    params.append('status', status);
-    params.append('page', page.toString());
+    // params.append('sort', sort);
+    // params.append('status', status);
+    // params.append('page', page.toString());
 
-    return this.http.get(this.IssueUrl, { search: params })
-      .map((res: Response) => res.json() as IServerResponse)
+    return this._http.get<Issue[]>(this.IssueUrl)
+    //.map(result => result.issues);// , { search: params })
+     // .map((res: Response) => res.json() as IServerResponse)
     //	.catch(this.handleError);
   }
 

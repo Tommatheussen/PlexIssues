@@ -1,17 +1,17 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
-import { Issue } from "@models";
-import { IssueService } from "./../issue.service";
+import { Issue } from '@models';
+import { IssueService } from './../issue.service';
 
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: "plexissues-home",
-  templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.css"],
+  selector: 'plexissues-shell',
+  templateUrl: './shell.component.html',
+  styleUrls: ['./shell.component.css'],
   providers: [IssueService]
 })
-export class HomeComponent implements OnInit {
+export class ShellComponent implements OnInit {
   issues: Observable<Issue[]>;
 
   constructor(private issueService: IssueService) {}

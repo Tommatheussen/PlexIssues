@@ -1,17 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, APP_INITIALIZER  } from '@angular/core';
-import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { HomeComponent } from './home/home.component';
 import { IssueListComponent } from './issue-list/issue-list.component';
-import { IssueComponent } from './issue/issue.component';
+import { IssueCardComponent } from './issue-card/issue-card.component';
 import { NewIssueComponent } from './new-issue/new-issue.component';
 
 import { AuthService } from './auth.service';
@@ -30,6 +29,10 @@ import { LoginModule } from './login/login.module';
 
 import { PlexIssuesSharedModule } from './shared/shared.module';
 
+import { HttpClientModule } from '@angular/common/http';
+
+import { ShellComponent } from './shell/shell.component';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -39,12 +42,11 @@ import { PlexIssuesSharedModule } from './shared/shared.module';
 
     PlexIssuesSharedModule,
 
+    HttpClientModule,
 
-    SetupModule,
-    LoginModule,
+    FlexLayoutModule,
 
     HttpModule,
-    NgxPaginationModule,
     Ng2Webstorage.forRoot({ prefix: 'plexissues' })
   ],
   declarations: [
@@ -52,8 +54,9 @@ import { PlexIssuesSharedModule } from './shared/shared.module';
     ToolbarComponent,
     HomeComponent,
     IssueListComponent,
-    IssueComponent,
-    NewIssueComponent
+    IssueCardComponent,
+    NewIssueComponent,
+    ShellComponent
   ],
   providers: [
     AuthGuard,
@@ -69,7 +72,7 @@ import { PlexIssuesSharedModule } from './shared/shared.module';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
 
 export function initConfiguration(config: AppConfig): Function {
   return () => config.load();

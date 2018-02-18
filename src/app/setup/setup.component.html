@@ -1,12 +1,12 @@
 <h1 class="mat-display-1">Setup</h1>
 <form navalidate [formGroup]="setupForm" (ngSubmit)="setup()">
-    <md-input-container>
-      <input mdInput type="text" placeholder="Hostname" formControlName="hostname">
-    </md-input-container>
+    <mat-input-container>
+      <input matInput type="text" placeholder="Hostname" formControlName="hostname">
+    </mat-input-container>
 
-    <md-input-container>
-      <input mdInput type="number" placeholder="Port" formControlName="port">
-    </md-input-container>
+    <mat-input-container>
+      <input matInput type="number" placeholder="Port" formControlName="port">
+    </mat-input-container>
 
-    <button md-raised-button type="submit" [disabled]="!setupForm.valid">Setup</button>
+    <button mat-raised-button type="submit" [disabled]="!setupForm.valid">Setup</button>
 </form>

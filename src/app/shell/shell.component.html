@@ -1,0 +1,15 @@
+<mat-sidenav-container fxFlex>
+  <mat-sidenav mode="side" opened>
+    <mat-nav-list>
+      <mat-list-item routerLink="/new">
+        <span>New issue</span>
+      </mat-list-item>
+      <mat-list-item *ngFor="let issue of issues | async">
+        <span>{{ issue.description }}</span>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content fxFlexFill>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

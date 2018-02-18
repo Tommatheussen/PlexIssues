@@ -1,24 +1,24 @@
 const express = require('express');
 const router = express.Router();
 
-const Settings = require('../models').Settings;
+const database = require('../database');
 
 router.get('/initial', (req, res) => {
-  Settings.findAll().then(settings => {
-    return res.json({ settings: settings[0] });
+  let settings = database.loadSettings();
+  return res.send({
+    status: settings ? 'exists' : 'notfound'
   });
 });
 
 router.post('/setup', (req, res) => {
   const settings = {
     hostname: req.body.hostname,
-    port: req.body.port,
-    login: req.body.login
-  }
-  Settings.create(settings)
-    .then(settings => {
-      return res.sendStatus(200);
-    });
+    port: req.body.port
+  };
+
+  database.saveSettings(settings);
+
+  return res.status(201).send();
 });
 
 module.exports = router;
