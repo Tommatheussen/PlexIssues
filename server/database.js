@@ -1,5 +1,4 @@
 const DB = require('nosql');
-
 const fs = require('fs');
 
 if (!fs.existsSync('./database')) {
@@ -16,6 +15,14 @@ exports.saveSettings = settings => {
   return nosql.meta('settings', settings);
 };
 
+exports.saveToken = token => {
+  return nosql.meta('token', token);
+};
+
+exports.getToken = () => {
+  return nosql.meta('token');
+};
+
 exports.insert = document => {
   return new Promise((resolve, reject) => {
     nosql.insert(document).callback((err, count) => {
@@ -25,7 +32,7 @@ exports.insert = document => {
   });
 };
 
-exports.get = () => {
+exports.getIssues = () => {
   return new Promise((resolve, reject) => {
     nosql.find().callback((err, response) => {
       if (err) reject(err);

@@ -7,25 +7,24 @@ import { SessionStorageService } from 'ngx-webstorage';
 
 @Injectable()
 export class AuthService {
-  authToken: string;
   loggedIn = false;
 
   constructor(private http: Http, private storage: SessionStorageService) {
-    this.authToken = this.storage.retrieve('token');
-    if (this.authToken) { this.loggedIn = true; } // TODO: Check token valid
+    this.loggedIn = this.storage.retrieve('token');
+    // TODO: Check back end token valid
   }
 
   login(username: string, password: string): Observable<boolean> {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    return this.http.post('/api/plex/login', JSON.stringify({ username, password }), { headers: headers })
+    return this.http
+      .post('/api/plex/login', JSON.stringify({ username, password }), { headers: headers })
       .map((res: Response) => {
         console.log(res.json());
-        this.authToken = res.json().token;
         this.loggedIn = true;
 
-        this.storage.store('token', this.authToken);
+        this.storage.store('token', true);
         return true;
       });
   }
