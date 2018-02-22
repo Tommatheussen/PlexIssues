@@ -1,0 +1,18 @@
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { IssuesService } from './issue.service';
+import { Issue } from '../interfaces';
+
+@Controller('issues')
+export class IssuesController {
+  constructor(private readonly _issuesService: IssuesService) {}
+
+  @Post()
+  async create(@Body() issue: Issue) {
+    this._issuesService.create(issue);
+  }
+
+  @Get()
+  async findAll(): Promise<Issue[]> {
+    return this._issuesService.findAll();
+  }
+}

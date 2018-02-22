@@ -10,15 +10,15 @@ import 'rxjs/add/operator/map';
 import { Issue } from '@models';
 
 interface IServerResponse {
-  issues: Issue[],
-  count: number
+  issues: Issue[];
+  count: number;
 }
 
 @Injectable()
 export class IssueService {
-  private IssueUrl: string = '/api/issue';
+  private IssueUrl: string = '/api/issues';
 
-  constructor(private http: Http, private _http: HttpClient) { }
+  constructor(private http: Http, private _http: HttpClient) {}
 
   getIssues(): Observable<Issue[]> {
     let params = new URLSearchParams();
@@ -26,9 +26,9 @@ export class IssueService {
     // params.append('status', status);
     // params.append('page', page.toString());
 
-    return this._http.get<Issue[]>(this.IssueUrl)
+    return this._http.get<Issue[]>(this.IssueUrl);
     //.map(result => result.issues);// , { search: params })
-     // .map((res: Response) => res.json() as IServerResponse)
+    // .map((res: Response) => res.json() as IServerResponse)
     //	.catch(this.handleError);
   }
 
@@ -36,8 +36,9 @@ export class IssueService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    return this.http.put(`${this.IssueUrl}/${issue.id}`, JSON.stringify(issue), { headers: headers })
-      .map((res: Response) => res.json())
+    return this.http
+      .put(`${this.IssueUrl}/${issue.id}`, JSON.stringify(issue), { headers: headers })
+      .map((res: Response) => res.json());
     // .catch(this.handleError);
   }
 
@@ -45,22 +46,17 @@ export class IssueService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    return this.http.post(this.IssueUrl, JSON.stringify(issue), { headers: headers })
-      .map((res: Response) => res.json())
+    return this.http
+      .post(this.IssueUrl, JSON.stringify(issue), { headers: headers })
+      .map((res: Response) => res.json());
   }
 
   getLatestIssues(): Observable<Issue[]> {
-    return this.http.get(`${this.IssueUrl}/latest`)
-      .map((res: Response) => res.json() as Issue[])
-  }
-
-  removeIssue(issue): void {
-    return;
+    return this.http.get(`${this.IssueUrl}/latest`).map((res: Response) => res.json() as Issue[]);
   }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
-
 }

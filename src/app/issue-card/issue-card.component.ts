@@ -1,14 +1,14 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from '@angular/core';
 
-import { Issue, PlexItem } from "@models";
+import { Issue, PlexItem } from '@models';
 
-import { IssueService } from "../issue.service";
-import { PlexService } from "../plex.service";
+import { IssueService } from '../issue.service';
+import { PlexService } from '../plex.service';
 
 @Component({
-  selector: "plexissues-issue-card",
-  templateUrl: "./issue-card.component.html",
-  styleUrls: ["./issue-card.component.css"],
+  selector: 'plexissues-issue-card',
+  templateUrl: './issue-card.component.html',
+  styleUrls: ['./issue-card.component.css'],
   providers: [IssueService, PlexService]
 })
 export class IssueCardComponent implements OnInit {
@@ -18,18 +18,15 @@ export class IssueCardComponent implements OnInit {
   public metadata: PlexItem;
 
   dict: { [index: string]: string } = {
-    movie: "local_movies",
-    show: "tv",
-    episode: "tv",
-    artist: "person",
-    album: "album",
-    track: "music_note"
+    movie: 'local_movies',
+    show: 'tv',
+    episode: 'tv',
+    artist: 'person',
+    album: 'album',
+    track: 'music_note'
   };
 
-  constructor(
-    private issueService: IssueService,
-    private plexService: PlexService
-  ) {}
+  constructor(private issueService: IssueService, private plexService: PlexService) {}
 
   ngOnInit() {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -47,12 +44,10 @@ export class IssueCardComponent implements OnInit {
   updateIssue(status): void {
     const copy = { ...this.issue };
     copy.status = status;
-    this.issueService
-      .updateIssue(copy)
-      .subscribe(() => (this.issue = { ...copy }));
+    this.issueService.updateIssue(copy).subscribe(() => (this.issue = { ...copy }));
   }
 
   removeIssue(): void {
-    this.issueService.removeIssue(this.issue);
+    // this.issueService.removeIssue(this.issue);
   }
 }

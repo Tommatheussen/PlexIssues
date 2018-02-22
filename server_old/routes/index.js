@@ -8,6 +8,5 @@ router.get('/', (req, res) => {
 
 router.use('/issue', require('./issues'));
 router.use('/plex', require('./plex'));
-router.use('/settings', require('./settings'));
 
 module.exports = router;
