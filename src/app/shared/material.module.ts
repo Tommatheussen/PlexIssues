@@ -10,6 +10,7 @@ import {
   MatInputModule,
   MatOptionModule,
   MatSelectModule,
+  MatProgressSpinnerModule,
   MatToolbarModule,
   MatSidenavModule,
   MatTabsModule,
@@ -23,6 +24,7 @@ import {
     MatCardModule,
     MatChipsModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule,
     MatIconModule,
     MatInputModule,
     MatOptionModule,
@@ -37,6 +39,7 @@ import {
     MatButtonModule,
     MatCardModule,
     MatChipsModule,
+    MatProgressSpinnerModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -48,4 +51,4 @@ import {
     MatListModule
   ]
 })
-export class PlexIssuesMaterialModule { }
+export class PlexIssuesMaterialModule {}

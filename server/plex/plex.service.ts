@@ -1,5 +1,5 @@
 import { Component } from '@nestjs/common';
-import { Issue, Credentials } from '../interfaces';
+import { Issue, Credentials, Settings } from '../interfaces';
 
 import * as rp from 'request-promise';
 import * as os from 'os';
@@ -25,14 +25,39 @@ export class PlexService {
     };
 
     return new Promise((resolve, reject) => {
-      let searchResult = rp(loginOptions).then(
+      rp(loginOptions).then(
         result => {
-          console.log(result);
           this._databaseService.saveToken(result.user.authToken);
           resolve();
         },
         err => {
-          console.log(`Error message: ${err}`);
+          console.log(`Login failed: ${err}`);
+          // TODO: Proper handling
+          reject(err);
+        }
+      );
+    });
+  }
+
+  search(term: string) {
+    const settings: Settings = this._databaseService.loadSettings();
+    const searchOptions = {
+      method: 'GET',
+      uri: `http://${settings.hostname}:${settings.port}/search`,
+      headers: this._getHeaders(),
+      json: true,
+      qs: {
+        query: term
+      }
+    };
+
+    return new Promise((resolve, reject) => {
+      rp(searchOptions).then(
+        result => {
+          resolve(result.MediaContainer.Metadata || []);
+        },
+        err => {
+          console.log(`Search failed: ${err}`);
           reject(err);
         }
       );

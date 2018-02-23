@@ -8,17 +8,19 @@ import { PlexService } from '../plex.service';
 
 import { NewIssue } from './new-issue.interface';
 
-import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/observable/from';
+import { Observable } from 'rxjs/Observable';
+import { startWith, switchMap, map } from 'rxjs/operators';
+
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/observable/of';
 
 @Component({
   selector: 'plexissues-new-issue',
   templateUrl: './new-issue.component.html',
   styleUrls: ['./new-issue.component.css'],
-  providers: [
-    IssueService,
-    PlexService
-  ]
+  providers: [IssueService, PlexService]
 })
 export class NewIssueComponent implements OnInit {
   public issueForm: FormGroup;
@@ -26,20 +28,16 @@ export class NewIssueComponent implements OnInit {
 
   plexItems: Observable<PlexItem[]>;
 
-  dict: { [index: string]: string; } = {
+  dict: { [index: string]: string } = {
     movie: 'local_movies',
     show: 'tv',
     episode: 'tv',
     artist: 'person',
     album: 'album',
     track: 'music_note'
-  }
+  };
 
-  constructor(
-    private issueService: IssueService,
-    private plexService: PlexService,
-    private _fb: FormBuilder
-  ) { }
+  constructor(private issueService: IssueService, private plexService: PlexService, private _fb: FormBuilder) {}
 
   ngOnInit() {
     // Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -51,13 +49,17 @@ export class NewIssueComponent implements OnInit {
     });
 
     this.plexItems = this.issueForm.controls['plexitem'].valueChanges
-      .debounceTime(500)
-      .startWith(null)
-      .switchMap(name => this.getPlexItems(name));
+      .debounceTime(200)
+      .distinctUntilChanged()
+      .pipe(
+        startWith<string | PlexItem>(''),
+        map(value => (typeof value === 'string' ? value : value.title)),
+        switchMap(name => this.getPlexItems(name))
+      );
   }
 
   getPlexItems(val: string): Observable<PlexItem[]> {
-    return val ? this.plexService.searchPlex(val) : Observable.from([]);
+    return val ? this.plexService.searchPlex(val) : Observable.of([]);
   }
 
   createIssue(model: NewIssue, isValid: boolean): void {
@@ -66,10 +68,9 @@ export class NewIssueComponent implements OnInit {
     newIssue.description = model.description;
     newIssue.item = model.plexitem.ratingKey;
 
-    this.issueService.addIssue(newIssue)
-      .subscribe(() => {
-        this.issueForm.reset();
-      });
+    this.issueService.addIssue(newIssue).subscribe(() => {
+      this.issueForm.reset();
+    });
   }
 
   displayFn(item: PlexItem) {

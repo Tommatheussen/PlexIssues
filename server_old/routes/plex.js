@@ -6,40 +6,6 @@ const database = require('../database');
 
 const rp = require('request-promise');
 
-router.post('/login', async (req, res) => {
-  try {
-    let loginResult = await rp(loginOptions);
-    database.saveToken(loginResult.user.authToken);
-    return res.status(204).send();
-  } catch (err) {
-    return res.status(400).send(err);
-  }
-});
-
-router.get('/search/:term', async (req, res) => {
-  let settings = database.loadSettings();
-  console.log(settings);
-  let searchOptions = {
-    method: 'GET',
-    uri: `http://${settings.hostname}:${settings.port}/search`,
-    headers: getHeaders(),
-    json: true,
-    qs: {
-      query: req.params.term
-    }
-  };
-
-  try {
-    let searchResult = await rp(searchOptions);
-
-    console.log(searchResult);
-    return res.send(searchResult.MediaContainer.Metadata || []);
-  } catch (err) {
-    console.log(err);
-    return res.status(400).send(err);
-  }
-});
-
 router.post('/', async (req, res) => {
   let key = req.body.key;
 

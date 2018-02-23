@@ -46,3 +46,6 @@ Thumbs.db
 /binaries
 /release
 *.sqlite
+
+database/
+database/database.meta

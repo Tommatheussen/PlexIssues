@@ -11,4 +11,9 @@ export class PlexController {
   async create(@Body() credentials: Credentials) {
     return this._plexService.login(credentials);
   }
+
+  @Get('search/:term')
+  async search(@Param('term') term: string) {
+    return this._plexService.search(term);
+  }
 }

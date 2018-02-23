@@ -12,7 +12,7 @@ export class IssuesService {
   constructor(private readonly _databaseService: DatabaseService) {}
 
   create(issue: Issue) {
-    this.issues.push(issue);
+    return this._databaseService.insertIssue(issue);
   }
 
   findAll(): Promise<Issue[]> {
