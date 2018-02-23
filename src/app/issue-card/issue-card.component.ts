@@ -31,14 +31,14 @@ export class IssueCardComponent implements OnInit {
   ngOnInit() {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    this.plexService
+    /*this.plexService
       .getPlexItem(this.issue.item)
       .finally(() => (this.loading = false))
       .subscribe(item => {
         console.log(item);
         this.metadata = item;
         //TODO: Add content to card
-      });
+      });*/
   }
 
   updateIssue(status): void {

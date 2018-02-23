@@ -54,4 +54,17 @@ export class DatabaseService {
       });
     });
   };
+
+  getIssue = (issue_id): Promise<Issue> => {
+    return new Promise((resolve, reject) => {
+      this._nosql.find().make(builder => {
+        builder.where('id', issue_id);
+        builder.first();
+        builder.callback((err, response) => {
+          if (err) reject(err);
+          else resolve(response);
+        });
+      });
+    });
+  };
 }

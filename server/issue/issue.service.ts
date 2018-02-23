@@ -28,4 +28,8 @@ export class IssuesService {
   findAll(): Promise<Issue[]> {
     return this._databaseService.getIssues();
   }
+
+  getIssue(issue_id: string): Promise<Issue> {
+    return this._databaseService.getIssue(issue_id);
+  }
 }

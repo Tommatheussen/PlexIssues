@@ -32,6 +32,7 @@ import { PlexIssuesSharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { ShellComponent } from './shell/shell.component';
+import { IssueDetailsComponent } from './issue-details/issue-details.component';
 
 @NgModule({
   imports: [
@@ -56,7 +57,8 @@ import { ShellComponent } from './shell/shell.component';
     IssueListComponent,
     IssueCardComponent,
     NewIssueComponent,
-    ShellComponent
+    ShellComponent,
+    IssueDetailsComponent
   ],
   providers: [
     AuthGuard,

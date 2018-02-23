@@ -11,6 +11,7 @@ import { NewIssueComponent } from './new-issue/new-issue.component';
 import { IssueListComponent } from './issue-list/issue-list.component';
 
 import { ShellComponent } from './shell/shell.component';
+import { IssueDetailsComponent } from './issue-details/issue-details.component';
 
 const appRoutes: Routes = [
   {
@@ -43,6 +44,10 @@ const appRoutes: Routes = [
           {
             path: 'list',
             component: IssueListComponent
+          },
+          {
+            path: ':issue_id',
+            component: IssueDetailsComponent
           }
         ]
       }

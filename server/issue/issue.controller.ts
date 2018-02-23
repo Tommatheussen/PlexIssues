@@ -15,4 +15,9 @@ export class IssuesController {
   async findAll(): Promise<Issue[]> {
     return this._issuesService.findAll();
   }
+
+  @Get(':id')
+  async get(@Param('id') issue_id): Promise<Issue> {
+    return this._issuesService.getIssue(issue_id);
+  }
 }
