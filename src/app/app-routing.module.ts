@@ -14,6 +14,11 @@ import { ShellComponent } from './shell/shell.component';
 
 const appRoutes: Routes = [
   {
+    path: 'setup',
+    canActivate: [SetupGuard],
+    loadChildren: './setup/setup.module#SetupModule'
+  },
+  {
     path: '',
     canActivate: [SetupGuard],
     children: [
@@ -42,11 +47,6 @@ const appRoutes: Routes = [
         ]
       }
     ]
-  },
-  {
-    path: 'setup',
-    canActivate: [SetupGuard],
-    loadChildren: './setup/setup.module#SetupModule'
   }
 ];
 

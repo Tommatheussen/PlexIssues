@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Http, Headers, Response } from '@angular/http';
 
 import { Router } from '@angular/router';
+import { SessionStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'plexissues-setup',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 export class SetupComponent implements OnInit {
   setupForm: FormGroup;
 
-  constructor(private http: Http, private router: Router) { }
+  constructor(private http: Http, private router: Router, private storage: SessionStorageService) {}
 
   ngOnInit() {
     this.setupForm = new FormGroup({
@@ -26,10 +27,17 @@ export class SetupComponent implements OnInit {
       const headers = new Headers();
       headers.append('Content-Type', 'application/json');
 
-      this.http.post('/api/settings/setup', JSON.stringify({
-        hostname: this.setupForm.value.hostname, port: this.setupForm.value.port
-      }), { headers: headers })
+      this.http
+        .post(
+          '/api/settings/setup',
+          JSON.stringify({
+            hostname: this.setupForm.value.hostname,
+            port: this.setupForm.value.port
+          }),
+          { headers: headers }
+        )
         .subscribe(res => {
+          this.storage.store('setup', true);
           this.router.navigate(['/login']);
         });
     }
