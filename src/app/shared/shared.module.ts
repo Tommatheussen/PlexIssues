@@ -6,27 +6,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { PlexIssuesMaterialModule } from './material.module';
 
-import { NgxPaginationModule } from 'ngx-pagination';
+import { TruncatePipe } from './truncate.pipe';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    FlexLayoutModule,
-    ReactiveFormsModule,
-
-    NgxPaginationModule,
-
-    PlexIssuesMaterialModule
-  ],
-  exports: [
-    CommonModule,
-    FormsModule,
-    FlexLayoutModule,
-    ReactiveFormsModule,
-    NgxPaginationModule,
-
-    PlexIssuesMaterialModule,
-  ]
+  declarations: [TruncatePipe],
+  imports: [CommonModule, FormsModule, FlexLayoutModule, ReactiveFormsModule, PlexIssuesMaterialModule],
+  exports: [CommonModule, FormsModule, FlexLayoutModule, ReactiveFormsModule, TruncatePipe, PlexIssuesMaterialModule]
 })
-export class PlexIssuesSharedModule { }
+export class PlexIssuesSharedModule {}
