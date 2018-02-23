@@ -34,6 +34,7 @@
     "@nestjs/websockets": "^4.5.8",
     "@types/lokijs": "^1.5.1",
     "@types/request-promise": "^4.1.41",
+    "@types/uuid": "^3.4.3",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "joi": "^13.1.2",
