@@ -14,6 +14,15 @@ import { Observable } from 'rxjs';
 export class ShellComponent implements OnInit {
   issues: Observable<Issue[]>;
 
+  _iconDict: { [index: string]: string } = {
+    movie: 'local_movies',
+    show: 'tv',
+    episode: 'tv',
+    artist: 'person',
+    album: 'album',
+    track: 'music_note'
+  };
+
   constructor(private issueService: IssueService) {}
 
   ngOnInit(): void {
@@ -21,14 +30,6 @@ export class ShellComponent implements OnInit {
   }
 
   getIssues(page: number): void {
-    this.issues = this.issueService.getIssues(); //.subscribe(result => this.issues = result) //this.sort, this.status, page)
-    /* .do(res => {
-        this.total = res.count;
-        this.p = page;
-        this.loading = false;
-      })*/ //.map(res => res.issues);
+    this.issues = this.issueService.getIssues();
   }
-  // this.issueService.getLatestIssues()
-  //  .subscribe(issues => this.issues = issues);
-  //}
 }

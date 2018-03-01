@@ -16,4 +16,9 @@ export class PlexController {
   async search(@Param('term') term: string) {
     return this._plexService.search(term);
   }
+
+  @Get(':key')
+  async metadata(@Param('key') key: string) {
+    return this._plexService.getMetadata(key);
+  }
 }

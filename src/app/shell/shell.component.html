@@ -7,7 +7,7 @@
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item *ngFor="let issue of issues | async" [routerLink]="['/', issue.id]">
-        <mat-icon mat-list-icon>folder</mat-icon>
+        <mat-icon mat-list-icon>{{ _iconDict[issue.item.type] }}</mat-icon>
         <h4 mat-line>{{ issue.item.name }}</h4>
         <p mat-line>{{ issue.description | truncate }}</p>
       </mat-list-item>

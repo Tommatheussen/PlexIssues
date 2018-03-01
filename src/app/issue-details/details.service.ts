@@ -14,7 +14,9 @@ import { HttpClient } from '@angular/common/http';
 export class DetailsService {
   constructor(private http: HttpClient) {}
 
-  getMetadata() {}
+  _getPlexMetadata(key: string) {
+    return this.http.get(`api/plex/${key}`);
+  }
 
   getIssueDetails(issue_id: string): Observable<Issue> {
     return this.http.get<Issue>(`api/issues/${issue_id}`);

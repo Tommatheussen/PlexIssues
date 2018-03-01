@@ -64,6 +64,28 @@ export class PlexService {
     });
   }
 
+  getMetadata(key: string) {
+    const settings: Settings = this._databaseService.loadSettings();
+    const metadataOptions = {
+      method: 'GET',
+      uri: `http://${settings.hostname}:${settings.port}/library/metadata/${key}`,
+      headers: this._getHeaders(),
+      json: true
+    };
+
+    return new Promise((resolve, reject) => {
+      rp(metadataOptions).then(
+        result => {
+          resolve(result.MediaContainer.Metadata[0] || []);
+        },
+        err => {
+          console.log(`Metadata failed: ${err}`);
+          reject(err);
+        }
+      );
+    });
+  }
+
   private _getHeaders = () => {
     return {
       'X-Plex-Platform': os.platform(),

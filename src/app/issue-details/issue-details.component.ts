@@ -24,8 +24,10 @@ export class IssueDetailsComponent implements OnInit {
     this._route.params.subscribe(params => {
       this.issueId = params['issue_id'];
 
-      this.issueDetails = this._detailsService.getIssueDetails(this.issueId);
-      // this.metadata = this._getPlexMetadata();
+      this.issueDetails = this._detailsService.getIssueDetails(this.issueId).map(result => {
+        this.metadata = this._detailsService._getPlexMetadata(result.item.key);
+        return result;
+      });
     });
   }
 }
