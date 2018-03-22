@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, HttpCode } from '@nestjs/common';
 import { IssuesService } from './issue.service';
 import { Issue } from '../interfaces';
 
@@ -6,6 +6,7 @@ import { Issue } from '../interfaces';
 export class IssuesController {
   constructor(private readonly _issuesService: IssuesService) {}
 
+  @HttpCode(204)
   @Post()
   async create(@Body() issue: Issue) {
     this._issuesService.create(issue);

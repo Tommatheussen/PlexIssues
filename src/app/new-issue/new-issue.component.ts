@@ -67,7 +67,7 @@ export class NewIssueComponent implements OnInit {
     newIssue.type = model.type;
     newIssue.description = model.description;
     newIssue.item = {
-      key: model.plexitem.key,
+      key: model.plexitem.ratingKey,
       name: model.plexitem.title,
       type: model.plexitem.type
     };

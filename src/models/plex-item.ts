@@ -1,5 +1,5 @@
 export class PlexItem {
-  key: string;
+  ratingKey: string;
   type: string;
   title: string;
 }
