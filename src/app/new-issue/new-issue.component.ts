@@ -9,7 +9,7 @@ import { PlexService } from '../plex.service';
 import { NewIssue } from './new-issue.interface';
 
 import { Observable } from 'rxjs/Observable';
-import { startWith, switchMap, map } from 'rxjs/operators';
+import { startWith, switchMap, map, filter } from 'rxjs/operators';
 
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -52,6 +52,7 @@ export class NewIssueComponent implements OnInit {
       .debounceTime(200)
       .distinctUntilChanged()
       .pipe(
+        filter(term => term),
         startWith<string | PlexItem>(''),
         map(value => (typeof value === 'string' ? value : value.title)),
         switchMap(name => this.getPlexItems(name))

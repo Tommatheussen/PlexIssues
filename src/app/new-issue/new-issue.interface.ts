@@ -2,7 +2,7 @@ export interface NewIssue {
   type: string;
   plexitem: {
     title: string;
-    key: string;
+    ratingKey: string;
     type: string;
   };
   description: string;
