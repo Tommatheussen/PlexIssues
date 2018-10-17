@@ -1,3 +1,8 @@
 .new-issue-card {
   margin-top: 15px;
 }
+
+:host {
+  display: flex;
+  flex: 1;
+}

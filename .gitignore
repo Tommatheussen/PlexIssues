@@ -41,6 +41,11 @@ testem.log
 .DS_Store
 Thumbs.db
 
+.vscode
 /server/config.js
 /binaries
 /release
+*.sqlite
+
+database/
+database/database.meta

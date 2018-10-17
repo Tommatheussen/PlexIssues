@@ -1,7 +1,5 @@
 # PlexIssues
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/Tommatheussen/PlexIssues.svg)](https://greenkeeper.io/)
-[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/PlexIssues/Lobby)
 [![Travis](https://img.shields.io/travis/rust-lang/rust.svg)](https://travis-ci.org/Tommatheussen/PlexIssues)
 
 This project is created to allow users of Plex to centralize all their issues regarding content in 1 place.
@@ -25,7 +23,8 @@ After the installation of the dependencies finished, you should be able to start
 ## Development
 As a first step, get the code from Github.
 
-Next, install all dependencies, I use Yarn, but npm should work just fine as well (`yarn` or `npm install`).
+Setup development environment, NPM is used to install the deps (`npm install`).
+To run cli command locally, `npx` is used, make sure this is installed (`npm i -g npx`).
 
 Adjust settings in the `server/config` folder, this holds the connection details to your Plex Server and database details.
 

@@ -1,34 +1,34 @@
-<md-card class="new-issue-card" fxFlexOffset="35" fxFlex="30">
-  <md-card-title>New issue</md-card-title>
-  <md-card-content>
+<mat-card class="new-issue-card" fxFlexOffset="35" fxFlex="30">
+  <mat-card-title>New issue</mat-card-title>
+  <mat-card-content>
     <form [formGroup]="issueForm" novalidate (ngSubmit)="createIssue(issueForm.value, issueForm.valid)" fxLayout="column" >
-      <md-input-container>
-        <input mdInput type="text" placeholder="Plex Item" formControlName="plexitem" [mdAutocomplete]="auto">
-      </md-input-container>
+      <mat-input-container>
+        <input matInput type="text" placeholder="Plex Item" formControlName="plexitem" [matAutocomplete]="auto">
+      </mat-input-container>
 
-      <md-select placeholder="Type" formControlName="type" class="issueform-control">
-        <md-option [value]="'language'">Language</md-option>
-        <md-option [value]="'quality'">Quality</md-option>
-        <md-option [value]="'subtitle'">Subtitles</md-option>
-      </md-select>
+      <mat-select placeholder="Type" formControlName="type" class="issueform-control">
+        <mat-option [value]="'language'">Language</mat-option>
+        <mat-option [value]="'quality'">Quality</mat-option>
+        <mat-option [value]="'subtitle'">Subtitles</mat-option>
+      </mat-select>
 
-      <md-input-container class="issueform-control">
+      <mat-input-container class="issueform-control">
         <textarea
-          mdInput
+          matInput
           type="text"
           placeholder="Description"
           formControlName="description"
-          mdTextereaAutosize></textarea>
-      </md-input-container>
+          matTextereaAutosize></textarea>
+      </mat-input-container>
 
-      <button md-raised-button type="submit" [disabled]="!issueForm.valid">Submit</button>
+      <button mat-raised-button type="submit" [disabled]="!issueForm.valid">Submit</button>
     </form>
-  </md-card-content>
-</md-card>
+  </mat-card-content>
+</mat-card>
 
-<md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
-  <md-option *ngFor="let item of (plexItems | async)" [value]="item">
-    <md-icon>{{ dict[item.type] }}</md-icon>
+<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+  <mat-option *ngFor="let item of (plexItems | async)" [value]="item">
+    <mat-icon>{{ dict[item.type] }}</mat-icon>
     <span>{{ item.title }}</span>
-  </md-option>
-</md-autocomplete>
+  </mat-option>
+</mat-autocomplete>

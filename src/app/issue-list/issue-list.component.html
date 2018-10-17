@@ -1,18 +1,19 @@
 <h1 fxLayout="row" fxLayoutAlign="center center">All issues</h1>
-<md-select placeholder="Sort" [(ngModel)]="sort" name="sort" (change)="getIssues(1)">
-    <md-option *ngFor="let option of sortOptions" [value]="option.value">{{ option.name }}</md-option>
-</md-select>
+<mat-select placeholder="Sort" [(ngModel)]="sort" name="sort" (change)="getIssues(1)">
+  <mat-option *ngFor="let option of sortOptions" [value]="option.value">{{ option.name }}</mat-option>
+</mat-select>
 
-<md-select placeholder="Status" [(ngModel)]="status" name="status" (change)="getIssues(1)">
-    <md-option *ngFor="let option of statusFilterOptions" [value]="option.value">{{ option.name }}</md-option>
-</md-select>
+<mat-select placeholder="Status" [(ngModel)]="status" name="status" (change)="getIssues(1)">
+  <mat-option *ngFor="let option of statusFilterOptions" [value]="option.value">{{ option.name }}</mat-option>
+</mat-select>
 
-<md-spinner *ngIf="loading"></md-spinner>
+<mat-spinner *ngIf="loading"></mat-spinner>
 
+<!--
 <div fxLayoutWrap="wrap">
-  <plexissues-issue [issue]="issue" fxFlex="50" *ngFor="let issue of issues | async | paginate: { id: 'server', itemsPerPage: 10, currentPage: p, totalItems: total }"></plexissues-issue>
+  <plexissues-issue-card [issue]="issue" fxFlex="50" *ngFor="let issue of issues | async | paginate: { id: 'server', itemsPerPage: 10, currentPage: p, totalItems: total }"></plexissues-issue-card>
 </div>
 
 <div class="has-text-centered">
     <pagination-controls (pageChange)="getIssues($event)" id="server"></pagination-controls>
-</div>
+</div> -->

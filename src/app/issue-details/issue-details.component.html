@@ -1,0 +1,14 @@
+<div fxLayout="row">
+  <div fxFlex="20">
+    <ng-container *ngIf="metadata | async; let metadata; else loading">
+      <h1>{{ metadata.title }}</h1>
+      <p>{{ metadata.summary }}</p>
+    </ng-container>
+  </div>
+  <div fxFlex>
+    <ng-container *ngIf="issueDetails | async; let issueDetails;else loading">
+      {{ issueDetails.type }}
+    </ng-container>
+  </div>
+</div>
+<ng-template #loading>Loading Data...</ng-template>

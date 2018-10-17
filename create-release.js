@@ -33,6 +33,9 @@ shell.cp('package.json', 'release');
 
 shell.rm('-rf', 'binaries');
 
+
+
+/*
 let node_version = 'v6.10.2';
 let base_link = `https://nodejs.org/dist/${node_version}/node-${node_version}-`
 let architectures = {
@@ -55,9 +58,9 @@ Object.keys(architectures).forEach(function (key) {
   console.log(`Started creating package for ${key}`);
 
   let extension = key.includes('windows') ? '.zip' : (key.includes('mac') ? '.tar.gz' : '.tar.xz');
-  
+
   shell.exec(`wget -q ${base_link}${architectures[key]}${extension}`);
-  
+
   let open_cmd = (key == 'windows_x86' || key == 'windows_x64') ? 'unzip -q' : 'tar -xf';
 
   shell.exec(`${open_cmd} node-${node_version}-${architectures[key]}${extension}`);
@@ -71,5 +74,8 @@ Object.keys(architectures).forEach(function (key) {
   shell.rm('-rf', key);
 
   console.log(`Finished package for ${key}`);
-}, this);
+}, this);*/
+
+shell.exec('npx pkg .');
+
 process.exit(0);

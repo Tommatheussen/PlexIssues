@@ -1,0 +1,39 @@
+<mat-card class="issue-card">
+  <div *ngIf="!loading">
+    <mat-card-content *ngIf="!metadata">
+      No metainfo found
+    </mat-card-content>
+    <mat-card-header *ngIf="metadata">
+      <div mat-card-avatar>
+        <mat-icon>{{ dict[metadata.type] }}</mat-icon>
+      </div>
+      <mat-chip-list>
+        <mat-chip>{{ issue.status }}</mat-chip>
+      </mat-chip-list>
+      <mat-card-title>
+        {{ metadata.title }} - {{ issue.type }}
+      </mat-card-title>
+      <mat-card-subtitle>Opened at {{ issue.openDate | date : 'dd-MM-yyyy HH:mm' }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ issue.description }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-mini-fab (click)="updateIssue('confirmed')" matTooltip="Confirm">
+        <mat-icon>done</mat-icon>
+      </button>
+      <button mat-mini-fab (click)="updateIssue('done')" matTooltip="Done">
+        <mat-icon>done_all</mat-icon>
+      </button>
+      <button mat-mini-fab (click)="updateIssue('rejected')" matTooltip="Reject">
+        <mat-icon>clear</mat-icon>
+      </button>
+      <button mat-mini-fab (click)="removeIssue()" matTooltip="Remove">
+        <mat-icon>delete_forever</mat-icon>
+      </button>
+    </mat-card-actions>
+  </div>
+  <mat-card-content *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </mat-card-content>
+</mat-card>
