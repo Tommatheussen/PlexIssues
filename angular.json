@@ -1,0 +1,92 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "plex-issues": {
+      "root": "",
+      "sourceRoot": "src/client",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist",
+            "index": "src/client/index.html",
+            "main": "src/client/main.ts",
+            "tsConfig": "src/client/tsconfig.app.json",
+            "polyfills": "src/client/polyfills.ts",
+            "assets": ["src/client/assets", "src/client/favicon.ico"],
+            "styles": ["src/client/styles.css"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/client/environments/environment.ts",
+                  "with": "src/client/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "plex-issues:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "plex-issues:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "plex-issues:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/client/test.ts",
+            "karmaConfig": "./karma.conf.js",
+            "polyfills": "src/client/polyfills.ts",
+            "tsConfig": "src/client/tsconfig.spec.json",
+            "scripts": [],
+            "styles": ["src/client/styles.css"],
+            "assets": ["src/client/assets", "src/client/favicon.ico"]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["src/client/tsconfig.app.json", "src/client/tsconfig.spec.json"],
+            "exclude": []
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "plex-issues",
+  "schematics": {
+    "@schematics/angular:component": {
+      "prefix": "plexissues",
+      "styleext": "css"
+    },
+    "@schematics/angular:directive": {
+      "prefix": "plexissues"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+<mat-card class="new-issue-card" fxFlexOffset="35" fxFlex="30">
+  <mat-card-title>New issue</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="issueForm" novalidate (ngSubmit)="createIssue(issueForm.value, issueForm.valid)" fxLayout="column">
+      <mat-form-field>
+        <input matInput type="text" placeholder="Plex Item" formControlName="plexitem" [matAutocomplete]="auto">
+      </mat-form-field>
+
+      <mat-select placeholder="Type" formControlName="type" class="issueform-control">
+        <mat-option [value]="'language'">Language</mat-option>
+        <mat-option [value]="'quality'">Quality</mat-option>
+        <mat-option [value]="'subtitle'">Subtitles</mat-option>
+      </mat-select>
+
+      <mat-form-field class="issueform-control">
+        <textarea matInput type="text" placeholder="Description" formControlName="description" matTextereaAutosize></textarea>
+      </mat-form-field>
+
+      <button mat-raised-button type="submit" [disabled]="!issueForm.valid">Submit</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+  <mat-option *ngFor="let item of (plexItems | async)" [value]="item">
+    <mat-icon>{{ dict[item.type] }}</mat-icon>
+    <span>{{ item.title }}</span>
+  </mat-option>
+</mat-autocomplete>
