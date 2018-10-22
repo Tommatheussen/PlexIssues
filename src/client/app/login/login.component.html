@@ -1,0 +1,15 @@
+<h1>PlexIssues Login</h1>
+<form navalidate [formGroup]="loginForm" (ngSubmit)="login()">
+  <mat-form-field>
+    <input matInput type="text" placeholder="Username" formControlName="username">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="password" placeholder="Password" formControlName="password">
+  </mat-form-field>
+
+  <!-- TODO -->
+  <!--<mat-checkbox>Remember me</mat-checkbox>-->
+
+  <button mat-raised-button type="submit" [disabled]="!loginForm.valid">Login</button>
+</form>
