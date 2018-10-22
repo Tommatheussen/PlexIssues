@@ -19,6 +19,9 @@ export class Issue {
   @Column()
   openDate: Date;
 
+  @Column()
+  itemKey: string;
+
   @ManyToOne(type => Item, item => item.issues, { cascade: true })
   item: Item;
 

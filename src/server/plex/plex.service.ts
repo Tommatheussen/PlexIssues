@@ -1,13 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import * as os from 'os';
 import * as rp from 'request-promise';
+import { InjectRepository } from '@nestjs/typeorm';
 
 const config = require('../plex.json');
 const serverConfig = require('../server.config.json');
 
+import { Item } from '../entities/item.entity';
+import { Repository } from 'typeorm';
+import { Metadata } from 'server/entities/metadata.entity';
+
 @Injectable()
 export class PlexService {
-  constructor() {}
+  constructor(@InjectRepository(Metadata) private readonly metadataRepository: Repository<Metadata>) {}
 
   // login(credentials: Credentials) {
   //   const loginOptions = {
@@ -62,25 +67,35 @@ export class PlexService {
     });
   }
 
-  getMetadata(key: string) {
-    const metadataOptions = {
-      method: 'GET',
-      uri: `http://${serverConfig.hostname}:${serverConfig.port}/library/metadata/${key}`,
-      headers: this._getHeaders(),
-      json: true
-    };
+  async getMetadata(key: string) {
+    const exists = await this.metadataRepository.count({ itemKey: key });
 
-    return new Promise((resolve, reject) => {
-      rp(metadataOptions).then(
-        result => {
-          resolve(result.MediaContainer.Metadata[0] || []);
-        },
-        err => {
-          console.log(`Metadata failed: ${err}`);
-          reject(err);
-        }
-      );
-    });
+    if (exists !== 0) {
+      return await this.metadataRepository.findOne({ itemKey: key });
+    } else {
+      const metadataOptions = {
+        method: 'GET',
+        uri: `http://${serverConfig.hostname}:${serverConfig.port}/library/metadata/${key}`,
+        headers: this._getHeaders(),
+        json: true
+      };
+
+      return new Promise((resolve, reject) => {
+        rp(metadataOptions).then(
+          async result => {
+            await this.metadataRepository.insert({
+              ...result.MediaContainer.Metadata[0],
+              itemKey: key
+            });
+            resolve(result.MediaContainer.Metadata[0] || []);
+          },
+          err => {
+            console.log(`Metadata failed: ${err}`);
+            reject(err);
+          }
+        );
+      });
+    }
   }
 
   private _getHeaders = () => {

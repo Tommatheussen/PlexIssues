@@ -1,5 +1,6 @@
-import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryColumn, Column, OneToMany, OneToOne } from 'typeorm';
 import { Issue } from './issues.entity';
+import { Metadata } from './metadata.entity';
 
 @Entity()
 export class Item {
@@ -14,4 +15,7 @@ export class Item {
 
   @OneToMany(type => Issue, issue => issue.item)
   issues: Issue[];
+
+  @OneToOne(type => Metadata)
+  metadata: Metadata;
 }

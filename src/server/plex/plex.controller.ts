@@ -1,5 +1,4 @@
-import { Controller, Get, Post, Body, Param, HttpCode } from '@nestjs/common';
-import { Issue, Credentials } from '../interfaces';
+import { Controller, Get, Param } from '@nestjs/common';
 import { PlexService } from './plex.service';
 
 @Controller('plex')

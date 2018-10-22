@@ -29,7 +29,7 @@ export class IssueDetailsComponent implements OnInit {
 
       this.issueDetails = this._detailsService.getIssueDetails(this.issueId).pipe(
         map(result => {
-          this.metadata = this._detailsService._getPlexMetadata(result.item.key);
+          this.metadata = this._detailsService._getPlexMetadata(result.itemKey);
           return result;
         })
       );
