@@ -15,7 +15,7 @@ export class IssuesService {
   }
 
   async findAll(): Promise<Issue[]> {
-    return await this.issueRepository.find();
+    return await this.issueRepository.find({ relations: ['item'] });
   }
 
   async getIssue(issue_id: number): Promise<Issue> {

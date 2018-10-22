@@ -3,7 +3,7 @@ export class Issue {
   type: string;
   item: {
     key: string;
-    name: string;
+    title: string;
     type: string;
   };
   description: string;

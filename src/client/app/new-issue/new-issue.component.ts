@@ -43,7 +43,7 @@ export class NewIssueComponent implements OnInit {
       description: ['']
     });
 
-    this.plexItems = this.issueForm.controls['plexitem'].valueChanges.pipe(
+    this.plexItems = this.issueForm.get('plexitem').valueChanges.pipe(
       debounceTime(200),
       distinctUntilChanged(),
       filter(term => term),
@@ -73,6 +73,6 @@ export class NewIssueComponent implements OnInit {
   }
 
   displayFn(item: PlexItem) {
-    return item ? item.title : item;
+    return item ? item.title : undefined;
   }
 }
