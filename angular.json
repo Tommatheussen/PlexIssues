@@ -17,7 +17,7 @@
             "tsConfig": "src/client/tsconfig.app.json",
             "polyfills": "src/client/polyfills.ts",
             "assets": ["src/client/assets", "src/client/favicon.ico"],
-            "styles": ["src/client/styles.css"],
+            "styles": ["src/client/styles.css", "node_modules/ngx-toastr/toastr.css"],
             "scripts": []
           },
           "configurations": {

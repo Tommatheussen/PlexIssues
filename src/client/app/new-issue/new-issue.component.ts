@@ -11,6 +11,8 @@ import { NewIssue } from './new-issue.interface';
 import { Observable, of } from 'rxjs';
 import { startWith, switchMap, map, filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'plexissues-new-issue',
   templateUrl: './new-issue.component.html',
@@ -32,7 +34,12 @@ export class NewIssueComponent implements OnInit {
     track: 'music_note'
   };
 
-  constructor(private issueService: IssueService, private plexService: PlexService, private _fb: FormBuilder) {}
+  constructor(
+    private issueService: IssueService,
+    private plexService: PlexService,
+    private _fb: FormBuilder,
+    private _toastr: ToastrService
+  ) {}
 
   ngOnInit() {
     // Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -68,6 +75,7 @@ export class NewIssueComponent implements OnInit {
     };
 
     this.issueService.addIssue(newIssue).subscribe(() => {
+      this._toastr.success('Issue created');
       this.issueForm.reset();
     });
   }
