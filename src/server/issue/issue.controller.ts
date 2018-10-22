@@ -1,6 +1,6 @@
-import { Controller, Get, Post, Body, Param, HttpCode } from '@nestjs/common';
-import { IssuesService } from './issue.service';
+import { Body, Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
 import { Issue } from '../entities/issues.entity';
+import { IssuesService } from './issue.service';
 
 @Controller('issues')
 export class IssuesController {

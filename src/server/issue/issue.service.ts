@@ -11,7 +11,7 @@ export class IssuesService {
     issue.status = 'new';
     issue.openDate = new Date();
 
-    return await this.issueRepository.insert(issue);
+    return await this.issueRepository.save(issue);
   }
 
   async findAll(): Promise<Issue[]> {

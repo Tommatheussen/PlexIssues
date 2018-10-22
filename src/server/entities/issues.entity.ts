@@ -10,7 +10,7 @@ export class Issue {
   @Column()
   type: string;
 
-  @Column()
+  @Column({ nullable: true })
   description: string;
 
   @Column()
@@ -19,7 +19,7 @@ export class Issue {
   @Column()
   openDate: Date;
 
-  @ManyToOne(type => Item, item => item.issues)
+  @ManyToOne(type => Item, item => item.issues, { cascade: true })
   item: Item;
 
   @OneToMany(type => Change, change => change.issue)
