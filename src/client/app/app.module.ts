@@ -34,6 +34,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ShellComponent } from './shell/shell.component';
 import { IssueDetailsComponent } from './issue-details/issue-details.component';
 
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -46,6 +48,8 @@ import { IssueDetailsComponent } from './issue-details/issue-details.component';
     HttpClientModule,
 
     FlexLayoutModule,
+
+    ToastrModule.forRoot(),
 
     HttpModule,
     Ng2Webstorage.forRoot({ prefix: 'plexissues' })
