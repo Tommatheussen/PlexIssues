@@ -1,9 +1,13 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.7.1
+version: v1.13.3
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   'npm:brace-expansion:20170302':
     - npm-check-updates > npmi > npm > node-gyp > rimraf > glob > minimatch > brace-expansion:
         reason: None given
         expires: '2017-09-08T10:10:29.342Z'
-patch: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-AXIOS-174505:
+    - '@nestjs/common > axios':
+        patched: '2019-05-07T03:05:21.353Z'
