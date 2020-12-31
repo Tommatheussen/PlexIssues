@@ -27,7 +27,7 @@
   },
   "private": true,
   "dependencies": {
-    "@nestjs/common": "^4.6.4",
+    "@nestjs/common": "^7.6.5",
     "@nestjs/core": "^4.6.4",
     "@nestjs/microservices": "^4.6.4",
     "@nestjs/testing": "^4.6.1",
