@@ -35,7 +35,7 @@
     "request-promise": "^4.2.2",
     "rxjs": "^6.3.3",
     "sql.js": "^0.5.0",
-    "typeorm": "^0.2.8"
+    "typeorm": "^0.2.25"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.10.0",
